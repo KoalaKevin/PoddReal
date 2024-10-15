@@ -28,12 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            knapp = new Button();
+            tbTest = new TextBox();
+            SuspendLayout();
+            // 
+            // knapp
+            // 
+            knapp.Location = new Point(156, 178);
+            knapp.Name = "knapp";
+            knapp.Size = new Size(112, 34);
+            knapp.TabIndex = 0;
+            knapp.Text = "button1";
+            knapp.UseVisualStyleBackColor = true;
+            // 
+            // tbTest
+            // 
+            tbTest.Location = new Point(502, 181);
+            tbTest.Name = "tbTest";
+            tbTest.Size = new Size(150, 31);
+            tbTest.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(tbTest);
+            Controls.Add(knapp);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button knapp;
+        private TextBox tbTest;
     }
 }
