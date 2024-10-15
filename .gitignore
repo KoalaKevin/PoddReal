@@ -396,3 +396,31 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Ignore Visual Studio temporary files, build results, and
+common node modules.
+.vscode/
+bin/
+obj/
+*.user
+*.suo
+*.log
+*.pdb
+*.cache
+*.exe
+*.dll
+*.dbmdl
+*.dbproj
+*.jfm
+
+Ignore Visual Studio 2019+ auto generated files
+.vs/
+
+Ignore nuget packages
+*.nupkg
+*.snupkg
+
+Ignore the Mac files if any
+.DS_Store
+
+Ignore build directories and temporary files
+TestResults/
