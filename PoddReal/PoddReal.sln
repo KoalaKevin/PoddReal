@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoddInterface", "PoddInterface\PoddInterface.csproj", "{0442083C-429A-433C-A0A1-92195411FC85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{510771DD-747B-4F62-A346-9066FB10EDED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{510771DD-747B-4F62-A346-9066FB10EDED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{651C18BD-A5BF-4572-B64D-5CF1C1F97319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{651C18BD-A5BF-4572-B64D-5CF1C1F97319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DL", "DL\DL.csproj", "{88A08F80-3334-4CE2-A812-8E51D889BE45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DL", "DL\DL.csproj", "{88A08F80-3334-4CE2-A812-8E51D889BE45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "WinFormsApp1\WinFormsApp1.csproj", "{2D922494-67ED-4B51-949E-3C0F03A64E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0442083C-429A-433C-A0A1-92195411FC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0442083C-429A-433C-A0A1-92195411FC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0442083C-429A-433C-A0A1-92195411FC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0442083C-429A-433C-A0A1-92195411FC85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{510771DD-747B-4F62-A346-9066FB10EDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{510771DD-747B-4F62-A346-9066FB10EDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510771DD-747B-4F62-A346-9066FB10EDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{88A08F80-3334-4CE2-A812-8E51D889BE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88A08F80-3334-4CE2-A812-8E51D889BE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88A08F80-3334-4CE2-A812-8E51D889BE45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D922494-67ED-4B51-949E-3C0F03A64E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D922494-67ED-4B51-949E-3C0F03A64E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D922494-67ED-4B51-949E-3C0F03A64E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D922494-67ED-4B51-949E-3C0F03A64E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
