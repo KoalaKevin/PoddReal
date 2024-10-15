@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.ServiceModel.Syndication;
 using System.Xml;
 
 namespace BL
@@ -17,8 +18,9 @@ namespace BL
                 enPodd.Name = item.Title.Text;
                 poddar.Add(enPodd);
                 Models.Podd utPodd = poddar[0];
-                tbTest.Text = utPodd.Name;
+                
 
             }
         }
+    }
 }
