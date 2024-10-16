@@ -2,7 +2,7 @@
 
 namespace DL
 {
-    public class Class1
+    public class Repository
     {
         private List<Podd> PoddLista = new List<Podd>();
         public void AddPodd(Podd Podd)

@@ -2,27 +2,34 @@
 using System.Reflection;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using DL;
+using Models;
 
 namespace BL
 {
     public class PoddHanterare
     {
+        private Repository repository;
+        public PoddHanterare() { 
+            repository = new Repository();
+        }
         private String? utPoddText;
         public String GetRss(String rssLink)
         {
-            Debug.WriteLine("Då");
+            
             XmlReader reader = XmlReader.Create("https://feed.pod.space/alexosigge");
             SyndicationFeed feed = SyndicationFeed.Load(reader);
 
-            List<Models.Podd> poddar = new List<Models.Podd>();
+            
 
             foreach (SyndicationItem item in feed.Items)
             {
-                Models.Podd enPodd = new Models.Podd();
+                Podd enPodd = new Podd();
                 enPodd.Url = item.Id.ToString();
                 enPodd.Name = item.Title.Text;
-                poddar.Add(enPodd);
-                Models.Podd utPodd = poddar[0];
+                repository.AddPodd(enPodd);
+                List<Podd> test = repository.GetAllPodds();
+                Podd utPodd = test[0];
                 utPoddText = utPodd.Name;
                 
 
