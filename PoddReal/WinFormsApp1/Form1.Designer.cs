@@ -30,13 +30,15 @@
         {
             button1 = new Button();
             txtTest = new TextBox();
+            txtRssInput = new TextBox();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(212, 188);
+            button1.Location = new Point(303, 313);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(107, 38);
             button1.TabIndex = 0;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -44,18 +46,29 @@
             // 
             // txtTest
             // 
-            txtTest.Location = new Point(468, 199);
+            txtTest.Location = new Point(669, 332);
+            txtTest.Margin = new Padding(4, 5, 4, 5);
             txtTest.Name = "txtTest";
-            txtTest.Size = new Size(100, 23);
+            txtTest.Size = new Size(141, 31);
             txtTest.TabIndex = 1;
+            // 
+            // txtRssInput
+            // 
+            txtRssInput.Location = new Point(705, 212);
+            txtRssInput.Name = "txtRssInput";
+            txtRssInput.Size = new Size(150, 31);
+            txtRssInput.TabIndex = 2;
+            txtRssInput.Text = "https://api.sr.se/api/rss/pod/itunes/3966";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1143, 750);
+            Controls.Add(txtRssInput);
             Controls.Add(txtTest);
             Controls.Add(button1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -66,5 +79,6 @@
 
         private Button button1;
         private TextBox txtTest;
+        private TextBox txtRssInput;
     }
 }

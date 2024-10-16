@@ -9,18 +9,22 @@ namespace BL
 {
     public class PoddHanterare
     {
+       
+
         private Repository repository;
         public PoddHanterare() { 
             repository = new Repository();
+            
         }
         private String? utPoddText;
         public String GetRss(String rssLink)
         {
+            try
+            {
+                XmlReader reader = XmlReader.Create(rssLink);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
             
-            XmlReader reader = XmlReader.Create("https://feed.pod.space/alexosigge");
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
 
-            
 
             foreach (SyndicationItem item in feed.Items)
             {
@@ -34,6 +38,9 @@ namespace BL
                 
 
             }
+            }
+            catch (Exception ex) { }
+
             return utPoddText;
         }
     }

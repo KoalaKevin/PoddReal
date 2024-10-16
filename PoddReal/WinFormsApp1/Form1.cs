@@ -7,6 +7,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         private PoddHanterare poddHanterare;
+        
         public Form1()
         {
             InitializeComponent();
@@ -15,8 +16,7 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            txtTest.Text = poddHanterare.GetRss("https://feed.pod.space/alexosigge");
+            txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
         }
     }
 }
