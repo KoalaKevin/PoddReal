@@ -47,5 +47,15 @@ namespace BL
 
             return utPoddText;
         }
+
+        public void LaggTillPodd(Podd nyPodd)
+        {
+            if(!string.IsNullOrWhiteSpace(nyPodd.Url) || !string.IsNullOrWhiteSpace(nyPodd.Kategori)) {
+                repository.AddPodd(nyPodd);
+            }else
+            {
+                Debug.WriteLine("Url eller Kategori saknas!");
+            }
+        }
     }
 }

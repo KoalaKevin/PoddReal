@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnLaggTillPodd = new Button();
             txtTest = new TextBox();
             txtRssInput = new TextBox();
             lbPoddar = new ListBox();
@@ -43,17 +42,13 @@
             btnRedigeraKategori = new Button();
             cbKategori = new ComboBox();
             txtNamn = new TextBox();
+            btnLaggTillPodd = new Button();
+            dgvPoddar = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
-            // 
-            // btnLaggTillPodd
-            // 
-            btnLaggTillPodd.Location = new Point(241, 34);
-            btnLaggTillPodd.Name = "btnLaggTillPodd";
-            btnLaggTillPodd.Size = new Size(75, 23);
-            btnLaggTillPodd.TabIndex = 0;
-            btnLaggTillPodd.Text = "Lägg till";
-            btnLaggTillPodd.UseVisualStyleBackColor = true;
-            btnLaggTillPodd.Click += button1_Click;
             // 
             // txtTest
             // 
@@ -66,7 +61,7 @@
             // txtRssInput
             // 
             txtRssInput.Location = new Point(241, 60);
-            txtRssInput.Margin = new Padding(2, 2, 2, 2);
+            txtRssInput.Margin = new Padding(2);
             txtRssInput.Name = "txtRssInput";
             txtRssInput.Size = new Size(240, 23);
             txtRssInput.TabIndex = 2;
@@ -96,7 +91,7 @@
             // btnAllaPoddar
             // 
             btnAllaPoddar.Location = new Point(19, 58);
-            btnAllaPoddar.Margin = new Padding(2, 2, 2, 2);
+            btnAllaPoddar.Margin = new Padding(2);
             btnAllaPoddar.Name = "btnAllaPoddar";
             btnAllaPoddar.Size = new Size(79, 21);
             btnAllaPoddar.TabIndex = 5;
@@ -106,10 +101,10 @@
             // 
             // btnTaBortPodd
             // 
-            btnTaBortPodd.Location = new Point(323, 35);
+            btnTaBortPodd.Location = new Point(324, 30);
             btnTaBortPodd.Margin = new Padding(2, 1, 2, 1);
             btnTaBortPodd.Name = "btnTaBortPodd";
-            btnTaBortPodd.Size = new Size(68, 21);
+            btnTaBortPodd.Size = new Size(68, 26);
             btnTaBortPodd.TabIndex = 6;
             btnTaBortPodd.Text = "Ta bort";
             btnTaBortPodd.UseVisualStyleBackColor = true;
@@ -117,14 +112,14 @@
             // 
             // btnRedigeraPodd
             // 
-            btnRedigeraPodd.Location = new Point(400, 35);
+            btnRedigeraPodd.Location = new Point(400, 30);
             btnRedigeraPodd.Margin = new Padding(2, 1, 2, 1);
             btnRedigeraPodd.Name = "btnRedigeraPodd";
-            btnRedigeraPodd.Size = new Size(81, 22);
+            btnRedigeraPodd.Size = new Size(81, 26);
             btnRedigeraPodd.TabIndex = 7;
             btnRedigeraPodd.Text = "Redigera";
             btnRedigeraPodd.UseVisualStyleBackColor = true;
-            btnRedigeraPodd.Click += button1_Click_1;
+            btnRedigeraPodd.Click += btnRedigeraPodd_Click;
             // 
             // lbAvsnitt
             // 
@@ -193,11 +188,49 @@
             txtNamn.TabIndex = 14;
             txtNamn.Text = "Namn";
             // 
+            // btnLaggTillPodd
+            // 
+            btnLaggTillPodd.Location = new Point(251, 30);
+            btnLaggTillPodd.Name = "btnLaggTillPodd";
+            btnLaggTillPodd.Size = new Size(68, 26);
+            btnLaggTillPodd.TabIndex = 15;
+            btnLaggTillPodd.Text = "Lägg till";
+            btnLaggTillPodd.UseVisualStyleBackColor = true;
+            btnLaggTillPodd.Click += btnLaggTillPodd_Click;
+            // 
+            // dgvPoddar
+            // 
+            dgvPoddar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPoddar.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
+            dgvPoddar.Location = new Point(535, 296);
+            dgvPoddar.Name = "dgvPoddar";
+            dgvPoddar.RowHeadersVisible = false;
+            dgvPoddar.Size = new Size(305, 96);
+            dgvPoddar.TabIndex = 16;
+            dgvPoddar.CellContentClick += dgvPoddar_CellContentClick;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Namn";
+            Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Titel";
+            Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Kategori";
+            Column3.Name = "Column3";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(793, 384);
+            ClientSize = new Size(936, 449);
+            Controls.Add(dgvPoddar);
+            Controls.Add(btnLaggTillPodd);
             Controls.Add(txtNamn);
             Controls.Add(cbKategori);
             Controls.Add(btnRedigeraKategori);
@@ -212,17 +245,15 @@
             Controls.Add(lbPoddar);
             Controls.Add(txtRssInput);
             Controls.Add(txtTest);
-            Controls.Add(btnLaggTillPodd);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvPoddar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button btnLaggTillPodd;
         private TextBox txtTest;
         private TextBox txtRssInput;
         private ListBox lbPoddar;
@@ -237,5 +268,10 @@
         private Button btnRedigeraKategori;
         private ComboBox cbKategori;
         private TextBox txtNamn;
+        private Button btnLaggTillPodd;
+        private DataGridView dgvPoddar;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
     }
 }

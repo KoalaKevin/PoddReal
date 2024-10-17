@@ -1,5 +1,7 @@
 using BL;
+using Models;
 using System;
+using System.Data;
 using System.Diagnostics;
 
 namespace WinFormsApp1
@@ -14,14 +16,9 @@ namespace WinFormsApp1
             poddHanterare = new PoddHanterare();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            UppdateraDataGridView();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,9 +37,37 @@ namespace WinFormsApp1
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnRedigeraPodd_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLaggTillPodd_Click(object sender, EventArgs e)
+        {
+
+            string namn = txtNamn.Text;
+            string url = txtRssInput.Text;
+            string kategori = cbKategori.SelectedText; // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
+            Podd nyPodd = new Podd(url, namn, kategori);
+            poddHanterare.LaggTillPodd(nyPodd);
+
+            UppdateraDataGridView();
+            //txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
+        }
+
+        private void dgvPoddar_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void UppdateraDataGridView()
+        {
+            dgvPoddar.Rows.Clear();
+
+            foreach (Podd enPodd in poddHanterare.getAllPodd())
+            {
+                dgvPoddar.Rows.Add(enPodd.Name, enPodd.Url, enPodd.Kategori); // enPodd.Url ska bli titel sen
+            }
         }
     }
 }
