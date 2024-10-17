@@ -17,6 +17,10 @@ namespace BL
             
         }
         private String? utPoddText;
+        public List<Podd> getAllPodd()
+        {
+            return repository.GetAllPodds();
+        }
         public String GetRss(String rssLink)
         {
             try

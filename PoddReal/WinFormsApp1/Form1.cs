@@ -28,5 +28,11 @@ namespace WinFormsApp1
         {
 
         }
+
+        private void btnAllaPoddar_Click(object sender, EventArgs e)
+        {
+            lbPoddar.DataSource = poddHanterare.getAllPodd();
+            lbPoddar.DisplayMember = "Name";
+        }
     }
 }
