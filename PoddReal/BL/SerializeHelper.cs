@@ -23,11 +23,22 @@ namespace BL
         {
             List<T> lista = new List<T>();
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Filen finns inte: " + filePath);
+                return lista; // Returnera en tom lista om filen inte finns
+            }
+            else
+            {
+
+            
+
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             lista = (List<T>)serializer.Deserialize(fileStream);
             fileStream.Close();
             return lista;
-            
+            }
+
         }
     }
 }
