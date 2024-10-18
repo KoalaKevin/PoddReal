@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+namespace BL
+{
+   public class SerializeHelper
+    {
+        public void tillXml<T>(List<T> list, String filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+            FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            serializer.Serialize(fileStream, list);
+            fileStream.Close();
+            Debug.WriteLine("test");
+        }
+
+        public List<T> laddaIn<T>(String filePath)
+        {
+            List<T> lista = new List<T>();
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            lista = (List<T>)serializer.Deserialize(fileStream);
+            fileStream.Close();
+            return lista;
+            
+        }
+    }
+}

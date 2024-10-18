@@ -12,8 +12,12 @@ namespace BL
        
 
         private Repository repository;
+        private SerializeHelper serializeHelper;
+
         public PoddHanterare() { 
             repository = new Repository();
+            serializeHelper = new SerializeHelper();
+            repository.fyllLista(serializeHelper.laddaIn<Podd>(@"..\..\poddList.xml"));
             
         }
         private String? utPoddText;
@@ -52,7 +56,11 @@ namespace BL
         {
             if(!string.IsNullOrWhiteSpace(nyPodd.Url) || !string.IsNullOrWhiteSpace(nyPodd.Kategori)) {
                 repository.AddPodd(nyPodd);
-            }else
+                
+                serializeHelper.tillXml(repository.GetAllPodds(), @"..\..\poddList.xml");
+
+            }
+            else
             {
                 Debug.WriteLine("Url eller Kategori saknas!");
             }

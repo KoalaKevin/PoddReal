@@ -10,6 +10,10 @@ namespace DL
             PoddLista
                 .Add(Podd);
         }
+        public void fyllLista(List<Podd> poddLista)
+        {
+            PoddLista = poddLista;
+        }
         public List<Podd> GetAllPodds()
         {
             return PoddLista;
