@@ -46,18 +46,24 @@ namespace WinFormsApp1
         {
 
             string url = txtRssInput.Text;
-            string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
-            string namn = txtNamn.Text;  
+            string titel = poddHanterare.HamtaTitel(url);
+            string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
-            poddHanterare.SkapaPodd(url, titel, namn, kategori); //Titel ska läggas till som parameter
+            poddHanterare.SkapaPodd(url, titel, namn, kategori);
 
             UppdateraDataGridView();
             //txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
         }
 
-        private void dgvPoddar_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPoddar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow rad = dgvPoddar.Rows[e.RowIndex];
+                txtNamn.Text = (string)rad.Cells["Column1"].Value;
+                cbKategori.Text = (string)rad.Cells["Column3"].Value;
+                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
+            }
         }
 
         private void UppdateraDataGridView()
@@ -66,8 +72,13 @@ namespace WinFormsApp1
 
             foreach (Podd enPodd in poddHanterare.HamtaPoddar())
             {
-                dgvPoddar.Rows.Add(enPodd.Namn, enPodd.Titel, enPodd.Kategori); // enPodd.Url ska bli titel sen
+                dgvPoddar.Rows.Add(enPodd.Namn, enPodd.Titel, enPodd.Kategori);
             }
+        }
+
+        private void txtTest_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

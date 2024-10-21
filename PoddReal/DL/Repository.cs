@@ -14,22 +14,55 @@ namespace DL
             Serializer = new SerializeHelper<Podd>();
 
         }
-        public void AddPodd(Podd Podd)
+        public void LaggTillPodd(Podd Podd)
         {
             PoddLista.Add(Podd);
-            SparaAndringar();
+            UppdateraLista();
         }
 
-        public void fyllLista(List<Podd> poddLista)
+        public void TaBortPodd(int index)
+        {
+            PoddLista.RemoveAt(index);
+            UppdateraLista();
+        }
+
+        public void RedigeraPodd(int index, Podd nyPodd)
+        {
+            if(index >= 0 && index < PoddLista.Count)
+            {
+                PoddLista[index] = nyPodd;
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt index");
+            }
+            UppdateraLista();
+        }
+
+        public void FyllLista(List<Podd> poddLista)
         {
             PoddLista = poddLista;
         }
+
+        public Podd HamtaPoddMedTitel(string titel)
+        {
+            Podd podd = null;
+            foreach(var item in Serializer.laddaIn(@"..\..\poddList.xml"))
+            {
+                if (item.Titel.Equals(titel))
+                {
+                    podd = item;
+                }
+            }
+            return podd;
+        }
+
         public List<Podd> GetAllPodds()
         {
             return PoddLista;
         }
 
-        public void SparaAndringar()
+        public void UppdateraLista()
         {
             Serializer.tillXml(PoddLista, @"..\..\poddList.xml");
         }

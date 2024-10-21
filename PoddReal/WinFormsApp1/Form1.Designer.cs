@@ -57,15 +57,16 @@
             txtTest.Size = new Size(100, 23);
             txtTest.TabIndex = 1;
             txtTest.Text = "Innehåller kod";
+            txtTest.TextChanged += txtTest_TextChanged;
             // 
             // txtRssInput
             // 
             txtRssInput.Location = new Point(241, 60);
             txtRssInput.Margin = new Padding(2);
             txtRssInput.Name = "txtRssInput";
+            txtRssInput.PlaceholderText = "Ange rss-url";
             txtRssInput.Size = new Size(240, 23);
             txtRssInput.TabIndex = 2;
-            txtRssInput.Text = "https://api.sr.se/api/rss/pod/itunes/3966";
             // 
             // lbPoddar
             // 
@@ -185,9 +186,9 @@
             // 
             txtNamn.Location = new Point(83, 33);
             txtNamn.Name = "txtNamn";
+            txtNamn.PlaceholderText = "Namn";
             txtNamn.Size = new Size(152, 23);
             txtNamn.TabIndex = 14;
-            txtNamn.Text = "Namn";
             // 
             // btnLaggTillPodd
             // 
@@ -206,9 +207,10 @@
             dgvPoddar.Location = new Point(535, 296);
             dgvPoddar.Name = "dgvPoddar";
             dgvPoddar.RowHeadersVisible = false;
+            dgvPoddar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPoddar.Size = new Size(305, 96);
             dgvPoddar.TabIndex = 16;
-            dgvPoddar.CellContentClick += dgvPoddar_CellContentClick;
+            dgvPoddar.CellClick += DgvPoddar_CellClick;
             // 
             // Column1
             // 

@@ -8,6 +8,7 @@
         public string Kategori { get; set; } // Ska bli public Kategori Kategori
 
 
+
         public Podd() { }
 
         public Podd(string url, string titel, string namn, string kategori)

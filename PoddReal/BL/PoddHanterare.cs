@@ -17,7 +17,7 @@ namespace BL
         public PoddHanterare() { 
             repository = new Repository();
             serializeHelper = new SerializeHelper<Podd>();
-            repository.fyllLista(serializeHelper.laddaIn(@"..\..\poddList.xml"));
+            repository.FyllLista(serializeHelper.laddaIn(@"..\..\poddList.xml"));
             
         }
         private String? utPoddText;
@@ -41,7 +41,7 @@ namespace BL
                 Podd enPodd = new Podd();
                 enPodd.Url = item.Id.ToString();
                 enPodd.Namn = item.Title.Text;
-                repository.AddPodd(enPodd);
+                repository.LaggTillPodd(enPodd);
                 List<Podd> test = repository.GetAllPodds();
                 Podd utPodd = test[0];
                 utPoddText = utPodd.Namn;
@@ -73,10 +73,15 @@ namespace BL
             
         }
 
+        public Podd HamtaPodd(string titel)
+        {
+            return repository.HamtaPoddMedTitel(titel);
+        }
+
         public void SkapaPodd(string url, string titel, string namn, string kategori)
         {
             Podd nyPodd = new Podd(url, titel, namn, kategori);
-                repository.AddPodd(nyPodd);   
+                repository.LaggTillPodd(nyPodd);   
         }
 
         public List<Podd> HamtaPoddar()
