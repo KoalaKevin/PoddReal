@@ -46,9 +46,9 @@ namespace WinFormsApp1
         {
 
             string url = txtRssInput.Text;
-            string titel = txtTest.Text; // string titel = ??????????? hur får man fram titel på podcast
+            string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
             string namn = txtNamn.Text;  
-            string kategori = cbKategori.SelectedText; // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
+            string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
             poddHanterare.SkapaPodd(url, titel, namn, kategori); //Titel ska läggas till som parameter
 
             UppdateraDataGridView();
@@ -64,7 +64,7 @@ namespace WinFormsApp1
         {
             dgvPoddar.Rows.Clear();
 
-            foreach (Podd enPodd in poddHanterare.getAllPodd())
+            foreach (Podd enPodd in poddHanterare.HamtaPoddar())
             {
                 dgvPoddar.Rows.Add(enPodd.Namn, enPodd.Titel, enPodd.Kategori); // enPodd.Url ska bli titel sen
             }

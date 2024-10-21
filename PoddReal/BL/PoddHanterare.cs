@@ -12,12 +12,12 @@ namespace BL
        
 
         private Repository repository;
-        private SerializeHelper serializeHelper;
+        private SerializeHelper<Podd> serializeHelper;
 
         public PoddHanterare() { 
             repository = new Repository();
-            serializeHelper = new SerializeHelper();
-            repository.fyllLista(serializeHelper.laddaIn<Podd>(@"..\..\poddList.xml"));
+            serializeHelper = new SerializeHelper<Podd>();
+            repository.fyllLista(serializeHelper.laddaIn(@"..\..\poddList.xml"));
             
         }
         private String? utPoddText;
@@ -54,6 +54,25 @@ namespace BL
             return utPoddText;
         }
 
+        public string HamtaTitel(string url)
+        {
+            try
+            {
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+
+                return feed.Title.Text;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Kunde inte hämta titeln");
+                Console.WriteLine(ex.Message);
+                return string.Empty;
+            }
+            
+        }
+
         public void SkapaPodd(string url, string titel, string namn, string kategori)
         {
             Podd nyPodd = new Podd(url, titel, namn, kategori);
@@ -64,5 +83,7 @@ namespace BL
         {
             return repository.GetAllPodds();
         }
+
+
     }
 }

@@ -173,6 +173,7 @@
             // cbKategori
             // 
             cbKategori.FormattingEnabled = true;
+            cbKategori.Items.AddRange(new object[] { "Historia", "Humor" });
             cbKategori.Location = new Point(102, 60);
             cbKategori.Margin = new Padding(2, 1, 2, 1);
             cbKategori.Name = "cbKategori";
