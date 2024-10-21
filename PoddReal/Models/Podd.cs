@@ -3,15 +3,18 @@
     public class Podd
     {
         public string Url { get; set; }
-        public string Name { get; set; }
+        public string Titel { get; set; }
+        public string Namn { get; set; }
         public string Kategori { get; set; } // Ska bli public Kategori Kategori
+
 
         public Podd() { }
 
-        public Podd(String url, String name, string kategori)
+        public Podd(string url, string titel, string namn, string kategori)
         {
             Url = url;
-            Name = name;
+            Titel = titel;
+            Namn = namn;
             Kategori = kategori;
         }
 

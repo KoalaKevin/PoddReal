@@ -52,18 +52,10 @@ namespace BL
             return utPoddText;
         }
 
-        public void LaggTillPodd(Podd nyPodd)
+        public void SkapaPodd(string url, string name, string kategori)
         {
-            if(!string.IsNullOrWhiteSpace(nyPodd.Url) || !string.IsNullOrWhiteSpace(nyPodd.Kategori)) {
-                repository.AddPodd(nyPodd);
-                
-                serializeHelper.tillXml(repository.GetAllPodds(), @"..\..\poddList.xml");
-
-            }
-            else
-            {
-                Debug.WriteLine("Url eller Kategori saknas!");
-            }
+            Podd nyPodd = new Podd(url, name, kategori);
+                repository.AddPodd(nyPodd);   
         }
     }
 }
