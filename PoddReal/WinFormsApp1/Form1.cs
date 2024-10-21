@@ -45,11 +45,11 @@ namespace WinFormsApp1
         private void btnLaggTillPodd_Click(object sender, EventArgs e)
         {
 
-            string namn = txtNamn.Text;
             string url = txtRssInput.Text;
+            string titel = txtTest.Text; // string titel = ??????????? hur får man fram titel på podcast
+            string namn = txtNamn.Text;  
             string kategori = cbKategori.SelectedText; // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
-            Podd nyPodd = new Podd(url, namn, kategori);
-            poddHanterare.LaggTillPodd(nyPodd);
+            poddHanterare.SkapaPodd(url, titel, namn, kategori); //Titel ska läggas till som parameter
 
             UppdateraDataGridView();
             //txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
@@ -66,7 +66,7 @@ namespace WinFormsApp1
 
             foreach (Podd enPodd in poddHanterare.getAllPodd())
             {
-                dgvPoddar.Rows.Add(enPodd.Name, enPodd.Url, enPodd.Kategori); // enPodd.Url ska bli titel sen
+                dgvPoddar.Rows.Add(enPodd.Namn, enPodd.Titel, enPodd.Kategori); // enPodd.Url ska bli titel sen
             }
         }
     }
