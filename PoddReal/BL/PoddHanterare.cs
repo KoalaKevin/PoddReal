@@ -38,11 +38,11 @@ namespace BL
             {
                 Podd enPodd = new Podd();
                 enPodd.Url = item.Id.ToString();
-                enPodd.Name = item.Title.Text;
+                enPodd.Namn = item.Title.Text;
                 repository.AddPodd(enPodd);
                 List<Podd> test = repository.GetAllPodds();
                 Podd utPodd = test[0];
-                utPoddText = utPodd.Name;
+                utPoddText = utPodd.Namn;
                 
 
             }
@@ -52,9 +52,9 @@ namespace BL
             return utPoddText;
         }
 
-        public void SkapaPodd(string url, string name, string kategori)
+        public void SkapaPodd(string url, string titel, string namn, string kategori)
         {
-            Podd nyPodd = new Podd(url, name, kategori);
+            Podd nyPodd = new Podd(url, titel, namn, kategori);
                 repository.AddPodd(nyPodd);   
         }
     }
