@@ -25,7 +25,9 @@ namespace BL
         {
             return repository.GetAllPodds();
         }
-        public String GetRss(String rssLink)
+
+        
+        public String GetRss(String rssLink) //Flytta till DL?
         {
             try
             {
@@ -56,6 +58,11 @@ namespace BL
         {
             Podd nyPodd = new Podd(url, titel, namn, kategori);
                 repository.AddPodd(nyPodd);   
+        }
+
+        public List<Podd> HamtaPoddar()
+        {
+            return repository.GetAllPodds();
         }
     }
 }
