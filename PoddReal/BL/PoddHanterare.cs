@@ -13,6 +13,7 @@ namespace BL
 
         private Repository repository;
         private SerializeHelper<Podd> serializeHelper;
+        private String? utPoddText;
 
         public PoddHanterare() { 
             repository = new Repository();
@@ -20,12 +21,6 @@ namespace BL
             repository.FyllLista(serializeHelper.laddaIn(@"..\..\poddList.xml"));
             
         }
-        private String? utPoddText;
-        public List<Podd> getAllPodd()
-        {
-            return repository.GetAllPodds();
-        }
-
         
         public String GetRss(String rssLink) //Flytta till DL?
         {
@@ -84,9 +79,19 @@ namespace BL
                 repository.LaggTillPodd(nyPodd);   
         }
 
-        public void RaderaPodd(string url)
+        public bool RaderaPodd(string url)
         {
-            repository.TaBortPodd(url);
+            bool godkandUrl = false;
+            foreach (Podd enPodd in HamtaPoddar())
+            {
+                if (enPodd.Url.Equals(url))
+                {
+                    repository.TaBortPodd(enPodd);
+                    godkandUrl = true;
+                    break;
+                }
+            } 
+            return godkandUrl;
         }
 
         public List<Podd> HamtaPoddar()

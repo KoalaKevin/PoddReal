@@ -30,9 +30,7 @@ namespace WinFormsApp1
         private void InitializeComponent()
         {
             txtRssInput = new TextBox();
-            lbPoddar = new ListBox();
             lbKategorier = new ListBox();
-            btnAllaPoddar = new Button();
             btnTaBortPodd = new Button();
             btnRedigeraPodd = new Button();
             lbAvsnitt = new ListBox();
@@ -53,49 +51,29 @@ namespace WinFormsApp1
             // 
             // txtRssInput
             // 
-            txtRssInput.Location = new Point(447, 128);
-            txtRssInput.Margin = new Padding(4, 4, 4, 4);
+            txtRssInput.Location = new Point(241, 60);
+            txtRssInput.Margin = new Padding(2);
             txtRssInput.Name = "txtRssInput";
             txtRssInput.PlaceholderText = "Ange rss-url";
-            txtRssInput.Size = new Size(442, 39);
+            txtRssInput.Size = new Size(240, 23);
             txtRssInput.TabIndex = 2;
-            // 
-            // lbPoddar
-            // 
-            lbPoddar.FormattingEnabled = true;
-            lbPoddar.Location = new Point(35, 189);
-            lbPoddar.Margin = new Padding(4, 3, 4, 3);
-            lbPoddar.Name = "lbPoddar";
-            lbPoddar.Size = new Size(433, 580);
-            lbPoddar.TabIndex = 3;
-            lbPoddar.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // lbKategorier
             // 
             lbKategorier.FormattingEnabled = true;
-            lbKategorier.Location = new Point(953, 163);
-            lbKategorier.Margin = new Padding(4, 3, 4, 3);
+            lbKategorier.ItemHeight = 15;
+            lbKategorier.Location = new Point(675, 88);
+            lbKategorier.Margin = new Padding(2, 1, 2, 1);
             lbKategorier.Name = "lbKategorier";
-            lbKategorier.Size = new Size(485, 164);
+            lbKategorier.Size = new Size(263, 79);
             lbKategorier.TabIndex = 4;
-            // 
-            // btnAllaPoddar
-            // 
-            btnAllaPoddar.Location = new Point(35, 124);
-            btnAllaPoddar.Margin = new Padding(4, 4, 4, 4);
-            btnAllaPoddar.Name = "btnAllaPoddar";
-            btnAllaPoddar.Size = new Size(147, 45);
-            btnAllaPoddar.TabIndex = 5;
-            btnAllaPoddar.Text = "Alla poddar";
-            btnAllaPoddar.UseVisualStyleBackColor = true;
-            btnAllaPoddar.Click += btnAllaPoddar_Click;
             // 
             // btnTaBortPodd
             // 
-            btnTaBortPodd.Location = new Point(602, 64);
-            btnTaBortPodd.Margin = new Padding(4, 3, 4, 3);
+            btnTaBortPodd.Location = new Point(324, 30);
+            btnTaBortPodd.Margin = new Padding(2, 1, 2, 1);
             btnTaBortPodd.Name = "btnTaBortPodd";
-            btnTaBortPodd.Size = new Size(126, 55);
+            btnTaBortPodd.Size = new Size(68, 26);
             btnTaBortPodd.TabIndex = 6;
             btnTaBortPodd.Text = "Ta bort";
             btnTaBortPodd.UseVisualStyleBackColor = true;
@@ -103,10 +81,10 @@ namespace WinFormsApp1
             // 
             // btnRedigeraPodd
             // 
-            btnRedigeraPodd.Location = new Point(742, 64);
-            btnRedigeraPodd.Margin = new Padding(4, 3, 4, 3);
+            btnRedigeraPodd.Location = new Point(400, 30);
+            btnRedigeraPodd.Margin = new Padding(2, 1, 2, 1);
             btnRedigeraPodd.Name = "btnRedigeraPodd";
-            btnRedigeraPodd.Size = new Size(151, 55);
+            btnRedigeraPodd.Size = new Size(81, 26);
             btnRedigeraPodd.TabIndex = 7;
             btnRedigeraPodd.Text = "Redigera";
             btnRedigeraPodd.UseVisualStyleBackColor = true;
@@ -115,27 +93,28 @@ namespace WinFormsApp1
             // lbAvsnitt
             // 
             lbAvsnitt.FormattingEnabled = true;
-            lbAvsnitt.Location = new Point(506, 189);
-            lbAvsnitt.Margin = new Padding(4, 3, 4, 3);
+            lbAvsnitt.ItemHeight = 15;
+            lbAvsnitt.Location = new Point(462, 88);
+            lbAvsnitt.Margin = new Padding(2, 1, 2, 1);
             lbAvsnitt.Name = "lbAvsnitt";
-            lbAvsnitt.Size = new Size(385, 580);
+            lbAvsnitt.Size = new Size(209, 244);
             lbAvsnitt.TabIndex = 8;
             // 
             // rtbBeskrivning
             // 
-            rtbBeskrivning.Location = new Point(953, 355);
-            rtbBeskrivning.Margin = new Padding(4, 3, 4, 3);
+            rtbBeskrivning.Location = new Point(462, 343);
+            rtbBeskrivning.Margin = new Padding(2, 1, 2, 1);
             rtbBeskrivning.Name = "rtbBeskrivning";
-            rtbBeskrivning.Size = new Size(308, 264);
+            rtbBeskrivning.Size = new Size(209, 146);
             rtbBeskrivning.TabIndex = 9;
             rtbBeskrivning.Text = "Beskrivning";
             // 
             // btnLaggTillKategori
             // 
-            btnLaggTillKategori.Location = new Point(953, 100);
-            btnLaggTillKategori.Margin = new Padding(4, 3, 4, 3);
+            btnLaggTillKategori.Location = new Point(677, 60);
+            btnLaggTillKategori.Margin = new Padding(2, 1, 2, 1);
             btnLaggTillKategori.Name = "btnLaggTillKategori";
-            btnLaggTillKategori.Size = new Size(151, 47);
+            btnLaggTillKategori.Size = new Size(81, 22);
             btnLaggTillKategori.TabIndex = 10;
             btnLaggTillKategori.Text = "Lägg till";
             btnLaggTillKategori.UseVisualStyleBackColor = true;
@@ -143,20 +122,20 @@ namespace WinFormsApp1
             // 
             // btnTaBortKategori
             // 
-            btnTaBortKategori.Location = new Point(1118, 100);
-            btnTaBortKategori.Margin = new Padding(4, 3, 4, 3);
+            btnTaBortKategori.Location = new Point(766, 60);
+            btnTaBortKategori.Margin = new Padding(2, 1, 2, 1);
             btnTaBortKategori.Name = "btnTaBortKategori";
-            btnTaBortKategori.Size = new Size(151, 47);
+            btnTaBortKategori.Size = new Size(81, 22);
             btnTaBortKategori.TabIndex = 11;
             btnTaBortKategori.Text = "Ta bort";
             btnTaBortKategori.UseVisualStyleBackColor = true;
             // 
             // btnRedigeraKategori
             // 
-            btnRedigeraKategori.Location = new Point(1287, 102);
-            btnRedigeraKategori.Margin = new Padding(4, 3, 4, 3);
+            btnRedigeraKategori.Location = new Point(857, 61);
+            btnRedigeraKategori.Margin = new Padding(2, 1, 2, 1);
             btnRedigeraKategori.Name = "btnRedigeraKategori";
-            btnRedigeraKategori.Size = new Size(151, 47);
+            btnRedigeraKategori.Size = new Size(81, 22);
             btnRedigeraKategori.TabIndex = 12;
             btnRedigeraKategori.Text = "Redigera";
             btnRedigeraKategori.UseVisualStyleBackColor = true;
@@ -165,28 +144,26 @@ namespace WinFormsApp1
             // 
             cbKategori.FormattingEnabled = true;
             cbKategori.Items.AddRange(new object[] { "Historia", "Humor" });
-            cbKategori.Location = new Point(190, 128);
-            cbKategori.Margin = new Padding(4, 3, 4, 3);
+            cbKategori.Location = new Point(102, 60);
+            cbKategori.Margin = new Padding(2, 1, 2, 1);
             cbKategori.Name = "cbKategori";
-            cbKategori.Size = new Size(242, 40);
+            cbKategori.Size = new Size(132, 23);
             cbKategori.TabIndex = 13;
             cbKategori.Text = "Kategori";
             // 
             // txtNamn
             // 
-            txtNamn.Location = new Point(155, 70);
-            txtNamn.Margin = new Padding(5, 6, 5, 6);
+            txtNamn.Location = new Point(83, 33);
             txtNamn.Name = "txtNamn";
             txtNamn.PlaceholderText = "Namn";
-            txtNamn.Size = new Size(278, 39);
+            txtNamn.Size = new Size(152, 23);
             txtNamn.TabIndex = 14;
             // 
             // btnLaggTillPodd
             // 
-            btnLaggTillPodd.Location = new Point(467, 64);
-            btnLaggTillPodd.Margin = new Padding(5, 6, 5, 6);
+            btnLaggTillPodd.Location = new Point(251, 30);
             btnLaggTillPodd.Name = "btnLaggTillPodd";
-            btnLaggTillPodd.Size = new Size(126, 55);
+            btnLaggTillPodd.Size = new Size(68, 26);
             btnLaggTillPodd.TabIndex = 15;
             btnLaggTillPodd.Text = "Lägg till";
             btnLaggTillPodd.UseVisualStyleBackColor = true;
@@ -196,13 +173,12 @@ namespace WinFormsApp1
             // 
             dgvPoddar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPoddar.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
-            dgvPoddar.Location = new Point(993, 631);
-            dgvPoddar.Margin = new Padding(5, 6, 5, 6);
+            dgvPoddar.Location = new Point(3, 88);
             dgvPoddar.Name = "dgvPoddar";
             dgvPoddar.RowHeadersVisible = false;
             dgvPoddar.RowHeadersWidth = 62;
             dgvPoddar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPoddar.Size = new Size(567, 205);
+            dgvPoddar.Size = new Size(454, 401);
             dgvPoddar.TabIndex = 16;
             dgvPoddar.CellClick += DgvPoddar_CellClick;
             // 
@@ -229,18 +205,17 @@ namespace WinFormsApp1
             // 
             // txtKategoriNamn
             // 
-            txtKategoriNamn.Location = new Point(953, 26);
-            txtKategoriNamn.Margin = new Padding(5, 6, 5, 6);
+            txtKategoriNamn.Location = new Point(677, 25);
             txtKategoriNamn.Name = "txtKategoriNamn";
-            txtKategoriNamn.Size = new Size(182, 39);
+            txtKategoriNamn.Size = new Size(100, 23);
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1738, 957);
+            ClientSize = new Size(1050, 533);
             Controls.Add(txtKategoriNamn);
             Controls.Add(dgvPoddar);
             Controls.Add(btnLaggTillPodd);
@@ -253,11 +228,8 @@ namespace WinFormsApp1
             Controls.Add(lbAvsnitt);
             Controls.Add(btnRedigeraPodd);
             Controls.Add(btnTaBortPodd);
-            Controls.Add(btnAllaPoddar);
             Controls.Add(lbKategorier);
-            Controls.Add(lbPoddar);
             Controls.Add(txtRssInput);
-            Margin = new Padding(5, 6, 5, 6);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -273,9 +245,7 @@ namespace WinFormsApp1
 
 #endregion
         private TextBox txtRssInput;
-        private ListBox lbPoddar;
         private ListBox lbKategorier;
-        private Button btnAllaPoddar;
         private Button btnTaBortPodd;
         private Button btnRedigeraPodd;
         private ListBox lbAvsnitt;

@@ -20,16 +20,10 @@ namespace DL
             UppdateraLista();
         }
 
-        public void TaBortPodd(string url)
+        public void TaBortPodd(Podd podd)
         {
-            foreach (Podd enPodd in PoddLista)
-            {
-                if (enPodd.Url.Equals(url))
-                {
-                    PoddLista.Remove(enPodd);
-                    break;
-                }
-            }
+            PoddLista.Remove(podd);
+            UppdateraLista();
         }
 
         public void RedigeraPodd(int index, Podd nyPodd)

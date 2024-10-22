@@ -31,14 +31,18 @@ namespace WinFormsApp1
 
         }
 
-        private void btnAllaPoddar_Click(object sender, EventArgs e)
-        {
-            lbPoddar.DataSource = poddHanterare.getAllPodd();
-            lbPoddar.DisplayMember = "Name";
-        }
-
         private void btnTaBort_Click(object sender, EventArgs e)
-        {
+        {  
+            bool godkandUrl = poddHanterare.RaderaPodd(txtRssInput.Text);
+
+            if (!godkandUrl)
+            {
+                MessageBox.Show("Vänligen tryck på den podcast du vill ta bort och ändra inte rss länken!");
+            }
+            
+            UppdateraDataGridView();
+            RensaFalt();
+
 
         }
 
@@ -61,7 +65,7 @@ namespace WinFormsApp1
             poddHanterare.SkapaPodd(url, titel, namn, kategori);
 
             UppdateraDataGridView();
-            //txtTest.Text = poddHanterare.GetRss(txtRssInput.Text);
+            RensaFalt();
         }
 
         private void DgvPoddar_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -85,9 +89,6 @@ namespace WinFormsApp1
             }
         }
 
-
-
-
         private void UppdateraKategoriListBox()
         {
             lbKategorier.Items.Clear();
@@ -100,7 +101,13 @@ namespace WinFormsApp1
 
         }
 
-        
+        private void RensaFalt()
+        {
+            txtNamn.Clear();
+            txtRssInput.Clear();
+            cbKategori.SelectedIndex = -1;
+            cbKategori.Text = "Kategori";
+        }
 
         private void btnLaggTillKategori_Click_1(object sender, EventArgs e)
         {
