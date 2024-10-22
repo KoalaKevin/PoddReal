@@ -84,6 +84,11 @@ namespace BL
                 repository.LaggTillPodd(nyPodd);   
         }
 
+        public void RaderaPodd(string url)
+        {
+            repository.TaBortPodd(url);
+        }
+
         public List<Podd> HamtaPoddar()
         {
             return repository.GetAllPodds();
