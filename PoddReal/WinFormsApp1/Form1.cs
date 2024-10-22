@@ -22,7 +22,7 @@ namespace WinFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             UppdateraDataGridView();
-            UppdateraKategoriListBox();
+            //UppdateraKategoriListBox();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -50,11 +50,11 @@ namespace WinFormsApp1
         {
 
             string url = txtRssInput.Text;
-<<<<<<< Updated upstream
-            string titel = poddHanterare.HamtaTitel(url);
-=======
+
+            
+
             string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
->>>>>>> Stashed changes
+
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
             poddHanterare.SkapaPodd(url, titel, namn, kategori);
@@ -84,10 +84,8 @@ namespace WinFormsApp1
             }
         }
 
-<<<<<<< Updated upstream
-        private void txtTest_TextChanged(object sender, EventArgs e)
-        {
-=======
+
+
         private void UppdateraKategoriListBox()
         {
             lbKategorier.Items.Clear();
@@ -105,7 +103,7 @@ namespace WinFormsApp1
             kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
->>>>>>> Stashed changes
+
 
         }
     }
