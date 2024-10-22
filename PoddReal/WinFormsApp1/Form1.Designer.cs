@@ -1,4 +1,5 @@
-﻿namespace WinFormsApp1
+﻿
+namespace WinFormsApp1
 {
     partial class Form1
     {
@@ -47,6 +48,7 @@
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
+            txtKategoriNamn = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -227,11 +229,20 @@
             Column3.HeaderText = "Kategori";
             Column3.Name = "Column3";
             // 
+            // txtKategoriNamn
+            // 
+            txtKategoriNamn.Location = new Point(513, 12);
+            txtKategoriNamn.Name = "txtKategoriNamn";
+            txtKategoriNamn.Size = new Size(100, 23);
+            txtKategoriNamn.TabIndex = 17;
+            txtKategoriNamn.TextChanged += textBox1_TextChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(936, 449);
+            Controls.Add(txtKategoriNamn);
             Controls.Add(dgvPoddar);
             Controls.Add(btnLaggTillPodd);
             Controls.Add(txtNamn);
@@ -256,6 +267,11 @@
             PerformLayout();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         #endregion
         private TextBox txtTest;
         private TextBox txtRssInput;
@@ -276,5 +292,6 @@
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
+        private TextBox txtKategoriNamn;
     }
 }

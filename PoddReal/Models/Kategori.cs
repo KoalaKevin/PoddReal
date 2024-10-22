@@ -8,7 +8,7 @@ namespace Models
 {
     public class Kategori
     {
-        public String? Name { get; set; }
+        public String Name { get; set; }
 
         public Kategori() { }
 
