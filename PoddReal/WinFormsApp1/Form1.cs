@@ -23,6 +23,7 @@ namespace WinFormsApp1
         {
             UppdateraDataGridView();
             //UppdateraKategoriListBox();
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace WinFormsApp1
 
             string url = txtRssInput.Text;
 
-            
+
 
             string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
 
@@ -86,6 +87,7 @@ namespace WinFormsApp1
 
 
 
+
         private void UppdateraKategoriListBox()
         {
             lbKategorier.Items.Clear();
@@ -95,16 +97,19 @@ namespace WinFormsApp1
             {
                 lbKategorier.Items.Add(enKategori.Name);
             }
+
         }
 
-        private void btnLaggTillKategori_Click(object sender, EventArgs e) 
+        
+
+        private void btnLaggTillKategori_Click_1(object sender, EventArgs e)
         {
+            Debug.WriteLine("test");
             string name = txtKategoriNamn.Text;
-            kategoriHanterare.SkapaKategori(name);
+            Debug.WriteLine(name);
+            kategoriHanterare.SkapaKategori(name); 
 
             UppdateraKategoriListBox();
-
-
         }
     }
 }
