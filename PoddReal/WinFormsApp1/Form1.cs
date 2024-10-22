@@ -3,22 +3,26 @@ using Models;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing.Text;
 
 namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
         private PoddHanterare poddHanterare;
+        private KategoriHanterare kategoriHanterare;
 
         public Form1()
         {
             InitializeComponent();
             poddHanterare = new PoddHanterare();
+            kategoriHanterare = new KategoriHanterare();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             UppdateraDataGridView();
+            UppdateraKategoriListBox();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,7 +50,11 @@ namespace WinFormsApp1
         {
 
             string url = txtRssInput.Text;
+<<<<<<< Updated upstream
             string titel = poddHanterare.HamtaTitel(url);
+=======
+            string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
+>>>>>>> Stashed changes
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
             poddHanterare.SkapaPodd(url, titel, namn, kategori);
@@ -76,9 +84,30 @@ namespace WinFormsApp1
             }
         }
 
+<<<<<<< Updated upstream
         private void txtTest_TextChanged(object sender, EventArgs e)
         {
+=======
+        private void UppdateraKategoriListBox()
+        {
+            lbKategorier.Items.Clear();
+
+            //List<Kategori> kategorier = kategoriHanterare.HamtaKategorier();
+            foreach (Kategori enKategori in kategoriHanterare.HamtaKategorier())
+            {
+                lbKategorier.Items.Add(enKategori.Name);
+            }
+        }
+
+        private void btnLaggTillKategori_Click(object sender, EventArgs e) 
+        {
+            string name = txtKategoriNamn.Text;
+            kategoriHanterare.SkapaKategori(name);
+
+            UppdateraKategoriListBox();
+>>>>>>> Stashed changes
 
         }
     }
 }
+
