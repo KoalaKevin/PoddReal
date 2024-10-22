@@ -54,7 +54,7 @@ namespace WinFormsApp1
 
 
 
-            string titel = poddHanterare.HamtaTitel(url); // string titel = ??????????? hur får man fram titel på podcast
+            string titel = poddHanterare.HamtaTitel(url); 
 
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
