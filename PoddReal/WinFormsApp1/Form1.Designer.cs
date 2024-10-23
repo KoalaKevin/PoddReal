@@ -42,10 +42,10 @@ namespace WinFormsApp1
             txtNamn = new TextBox();
             btnLaggTillPodd = new Button();
             dgvPoddar = new DataGridView();
+            txtKategoriNamn = new TextBox();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
-            txtKategoriNamn = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -182,27 +182,6 @@ namespace WinFormsApp1
             dgvPoddar.TabIndex = 16;
             dgvPoddar.CellClick += DgvPoddar_CellClick;
             // 
-            // Column1
-            // 
-            Column1.HeaderText = "Namn";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Titel";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.Width = 150;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Kategori";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.Width = 150;
-            // 
             // txtKategoriNamn
             // 
             txtKategoriNamn.Location = new Point(677, 25);
@@ -210,6 +189,33 @@ namespace WinFormsApp1
             txtKategoriNamn.Size = new Size(100, 23);
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;
+            // 
+            // Column1
+            // 
+            Column1.HeaderText = "Namn";
+            Column1.MinimumWidth = 8;
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Column1.Width = 150;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "Titel";
+            Column2.MinimumWidth = 8;
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            Column2.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Column2.Width = 150;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Kategori";
+            Column3.MinimumWidth = 8;
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            Column3.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Column3.Width = 150;
             // 
             // Form1
             // 
@@ -257,9 +263,9 @@ namespace WinFormsApp1
         private TextBox txtNamn;
         private Button btnLaggTillPodd;
         private DataGridView dgvPoddar;
+        private TextBox txtKategoriNamn;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
-        private TextBox txtKategoriNamn;
     }
 }

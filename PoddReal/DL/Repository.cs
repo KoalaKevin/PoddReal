@@ -28,14 +28,7 @@ namespace DL
 
         public void RedigeraPodd(int index, Podd nyPodd)
         {
-            if(index >= 0 && index < PoddLista.Count)
-            {
-                PoddLista[index] = nyPodd;
-            }
-            else
-            {
-                Console.WriteLine("Ogiltigt index");
-            }
+            PoddLista[index] = nyPodd;
             UppdateraLista();
         }
 
@@ -44,17 +37,9 @@ namespace DL
             PoddLista = poddLista;
         }
 
-        public Podd HamtaPoddMedTitel(string titel)
+        public Podd HamtaMedTitel(string titel)
         {
-            Podd podd = null;
-            foreach(var item in Serializer.laddaIn(@"..\..\poddList.xml"))
-            {
-                if (item.Titel.Equals(titel))
-                {
-                    podd = item;
-                }
-            }
-            return podd;
+            return GetAllPodds().FirstOrDefault(p => p.Titel.Equals(titel));
         }
 
         public List<Podd> GetAllPodds()

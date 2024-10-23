@@ -11,6 +11,7 @@ namespace WinFormsApp1
     {
         private PoddHanterare poddHanterare;
         private KategoriHanterare kategoriHanterare;
+        private int poddIndex = -1;
 
         public Form1()
         {
@@ -32,34 +33,35 @@ namespace WinFormsApp1
         }
 
         private void btnTaBort_Click(object sender, EventArgs e)
-        {  
+        {
             bool godkandUrl = poddHanterare.RaderaPodd(txtRssInput.Text);
 
             if (!godkandUrl)
             {
                 MessageBox.Show("Vänligen tryck på den podcast du vill ta bort och ändra inte rss länken!");
             }
-            
+
             UppdateraDataGridView();
             RensaFalt();
-
-
         }
 
         private void btnRedigeraPodd_Click(object sender, EventArgs e)
         {
-
+            string url = txtRssInput.Text;
+            string titel = poddHanterare.HamtaTitel(url);
+            string namn = txtNamn.Text;
+            string kategori = cbKategori.SelectedItem.ToString();
+            Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lösa det bättre?
+            poddHanterare.RedigeraPodd(poddIndex, redigeradPodd);
+            UppdateraDataGridView();
+            RensaFalt();
         }
 
         private void btnLaggTillPodd_Click(object sender, EventArgs e)
         {
 
             string url = txtRssInput.Text;
-
-
-
-            string titel = poddHanterare.HamtaTitel(url); 
-
+            string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
             poddHanterare.SkapaPodd(url, titel, namn, kategori);
@@ -76,6 +78,7 @@ namespace WinFormsApp1
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
                 txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
+                poddIndex = e.RowIndex;
             }
         }
 
@@ -114,10 +117,10 @@ namespace WinFormsApp1
             Debug.WriteLine("test");
             string name = txtKategoriNamn.Text;
             Debug.WriteLine(name);
-            kategoriHanterare.SkapaKategori(name); 
+            kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
-        }
+        }  
     }
 }
 

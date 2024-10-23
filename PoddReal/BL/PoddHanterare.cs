@@ -61,8 +61,8 @@ namespace BL
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Kunde inte hämta titeln");
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine("Kunde inte hämta titeln");
+                Debug.WriteLine(ex.Message);
                 return string.Empty;
             }
             
@@ -70,7 +70,7 @@ namespace BL
 
         public Podd HamtaPodd(string titel)
         {
-            return repository.HamtaPoddMedTitel(titel);
+            return repository.HamtaMedTitel(titel);
         }
 
         public void SkapaPodd(string url, string titel, string namn, string kategori)
@@ -92,6 +92,18 @@ namespace BL
                 }
             } 
             return godkandUrl;
+        }
+
+        public void RedigeraPodd(int index, Podd podd)
+        {
+            if (index >= 0 && index < HamtaPoddar().Count && podd != null)
+            {  
+                repository.RedigeraPodd(index, podd);
+            }
+            else
+            {
+                Debug.WriteLine("Felaktigt index eller Podd!");
+            }
         }
 
         public List<Podd> HamtaPoddar()
