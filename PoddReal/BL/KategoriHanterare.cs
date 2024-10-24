@@ -11,29 +11,22 @@ namespace BL
 {
     public class KategoriHanterare
     {
-        private KategoriRepository kategoriRepository;
-        private SerializeHelper<Kategori> serializeHelper;
+        private IRepository<Kategori> kategoriRepository;
+        private String? utKategoriText;
 
         public KategoriHanterare() {
             kategoriRepository = new KategoriRepository();
-            serializeHelper = new SerializeHelper<Kategori>();
-            kategoriRepository.fyllLista(serializeHelper.laddaIn(@"..\..\kategoriList.xml"));
-        }
-        private String? utKategoriText;
-        public List<Kategori> getAllKategorier()
-        {
-            return kategoriRepository.GetAllKategorier();
         }
         
         public void SkapaKategori(string name)
         {
             Kategori nyKategori = new Kategori(name);
-            kategoriRepository.AddKategori(nyKategori);
+            kategoriRepository.Skapa(nyKategori);
         }
 
         public List<Kategori> HamtaKategorier()
         {
-            return kategoriRepository.GetAllKategorier();
+            return kategoriRepository.HamtaAlla();
         }
 
         public void UppdateraKategoriNamn(string gammaltNamn, string nyttNamn)
@@ -43,8 +36,8 @@ namespace BL
                 throw new ArgumentException("Både det gamla och nya namnet måste anges.");
             }
 
-            Kategori kategori = kategoriRepository.GetAllKategorier()
-                                                   .FirstOrDefault(k => k.Name == gammaltNamn);
+            Kategori kategori = kategoriRepository.HamtaAlla()
+                                                   .FirstOrDefault(k => k.Name.Equals(gammaltNamn));
 
 
             if (kategori == null)

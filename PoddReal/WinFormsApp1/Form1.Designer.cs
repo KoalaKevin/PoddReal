@@ -42,10 +42,10 @@ namespace WinFormsApp1
             txtNamn = new TextBox();
             btnLaggTillPodd = new Button();
             dgvPoddar = new DataGridView();
-            txtKategoriNamn = new TextBox();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
+            txtKategoriNamn = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -129,6 +129,7 @@ namespace WinFormsApp1
             btnTaBortKategori.TabIndex = 11;
             btnTaBortKategori.Text = "Ta bort";
             btnTaBortKategori.UseVisualStyleBackColor = true;
+            btnTaBortKategori.Click += btnTaBortKategori_Click;
             // 
             // btnRedigeraKategori
             // 
@@ -144,7 +145,6 @@ namespace WinFormsApp1
             // cbKategori
             // 
             cbKategori.FormattingEnabled = true;
-            cbKategori.Items.AddRange(new object[] { "Historia", "Humor" });
             cbKategori.Location = new Point(102, 60);
             cbKategori.Margin = new Padding(2, 1, 2, 1);
             cbKategori.Name = "cbKategori";
@@ -183,14 +183,6 @@ namespace WinFormsApp1
             dgvPoddar.TabIndex = 16;
             dgvPoddar.CellClick += DgvPoddar_CellClick;
             // 
-            // txtKategoriNamn
-            // 
-            txtKategoriNamn.Location = new Point(677, 25);
-            txtKategoriNamn.Name = "txtKategoriNamn";
-            txtKategoriNamn.Size = new Size(100, 23);
-            txtKategoriNamn.TabIndex = 17;
-            txtKategoriNamn.TextChanged += textBox1_TextChanged;
-            // 
             // Column1
             // 
             Column1.HeaderText = "Namn";
@@ -217,6 +209,14 @@ namespace WinFormsApp1
             Column3.ReadOnly = true;
             Column3.SortMode = DataGridViewColumnSortMode.NotSortable;
             Column3.Width = 150;
+            // 
+            // txtKategoriNamn
+            // 
+            txtKategoriNamn.Location = new Point(677, 25);
+            txtKategoriNamn.Name = "txtKategoriNamn";
+            txtKategoriNamn.Size = new Size(100, 23);
+            txtKategoriNamn.TabIndex = 17;
+            txtKategoriNamn.TextChanged += textBox1_TextChanged;
             // 
             // Form1
             // 

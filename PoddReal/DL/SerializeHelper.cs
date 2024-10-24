@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BL
+namespace DL
 {
-   public class SerializeHelper<T>
+    internal class SerializeHelper<T>
     {
         public void tillXml(List<T> list, String filePath)
         {

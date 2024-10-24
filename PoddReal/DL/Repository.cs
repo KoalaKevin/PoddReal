@@ -1,9 +1,8 @@
-﻿using BL;
-using Models;
+﻿using Models;
 
 namespace DL
 {
-    public class Repository
+    public class Repository : IPoddRepository<Podd>
     {
         private List<Podd> PoddLista;
         private SerializeHelper<Podd> Serializer;
@@ -12,42 +11,47 @@ namespace DL
         {
             PoddLista = new List<Podd>();
             Serializer = new SerializeHelper<Podd>();
-
+            PoddLista = HamtaAlla();
         }
-        public void LaggTillPodd(Podd Podd)
+        public void Skapa(Podd Podd)
         {
             PoddLista.Add(Podd);
-            UppdateraLista();
+            SparaAndringar();
         }
 
-        public void TaBortPodd(Podd podd)
+        public void Radera(int index)
         {
-            PoddLista.Remove(podd);
-            UppdateraLista();
+            PoddLista.RemoveAt(index);
+            SparaAndringar();
         }
 
-        public void RedigeraPodd(int index, Podd nyPodd)
+        public void Uppdatera(int index, Podd nyPodd)
         {
             PoddLista[index] = nyPodd;
-            UppdateraLista();
-        }
-
-        public void FyllLista(List<Podd> poddLista)
-        {
-            PoddLista = poddLista;
+            SparaAndringar();
         }
 
         public Podd HamtaMedTitel(string titel)
         {
-            return GetAllPodds().FirstOrDefault(p => p.Titel.Equals(titel));
+            return HamtaAlla().FirstOrDefault(p => p.Titel.Equals(titel));
         }
 
-        public List<Podd> GetAllPodds()
+        public Podd HamtaMedUrl(string url)
         {
-            return PoddLista;
+            return HamtaAlla().FirstOrDefault(p => p.Url.Equals(url));
         }
 
-        public void UppdateraLista()
+        public int HamtaIndex(string url)
+        {
+            return HamtaAlla().FindIndex(p => p.Url.Equals(url));
+        }
+
+        public List<Podd> HamtaAlla()
+        {
+            return Serializer.laddaIn(@"..\..\poddList.xml");
+        }
+
+        public void SparaAndringar()
         {
             Serializer.tillXml(PoddLista, @"..\..\poddList.xml");
         }

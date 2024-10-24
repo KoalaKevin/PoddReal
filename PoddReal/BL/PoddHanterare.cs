@@ -11,15 +11,11 @@ namespace BL
     {
        
 
-        private Repository repository;
-        private SerializeHelper<Podd> serializeHelper;
+        private IPoddRepository<Podd> repository;
         private String? utPoddText;
 
         public PoddHanterare() { 
-            repository = new Repository();
-            serializeHelper = new SerializeHelper<Podd>();
-            repository.FyllLista(serializeHelper.laddaIn(@"..\..\poddList.xml"));
-            
+            repository = new Repository();       
         }
         
         public String GetRss(String rssLink) //Flytta till DL?
@@ -36,8 +32,8 @@ namespace BL
                 Podd enPodd = new Podd();
                 enPodd.Url = item.Id.ToString();
                 enPodd.Namn = item.Title.Text;
-                repository.LaggTillPodd(enPodd);
-                List<Podd> test = repository.GetAllPodds();
+                repository.Skapa(enPodd);
+                List<Podd> test = repository.HamtaAlla();
                 Podd utPodd = test[0];
                 utPoddText = utPodd.Namn;
                 
@@ -73,32 +69,29 @@ namespace BL
             return repository.HamtaMedTitel(titel);
         }
 
+        public int HamtaIndexMedUrl(string url)
+        {
+           return repository.HamtaIndex(url);
+        }
+
+
         public void SkapaPodd(string url, string titel, string namn, string kategori)
         {
             Podd nyPodd = new Podd(url, titel, namn, kategori);
-                repository.LaggTillPodd(nyPodd);   
+                repository.Skapa(nyPodd);   
         }
 
-        public bool RaderaPodd(string url)
+        public void RaderaPodd(string url)
         {
-            bool godkandUrl = false;
-            foreach (Podd enPodd in HamtaPoddar())
-            {
-                if (enPodd.Url.Equals(url))
-                {
-                    repository.TaBortPodd(enPodd);
-                    godkandUrl = true;
-                    break;
-                }
-            } 
-            return godkandUrl;
+            int index = repository.HamtaIndex(url);
+            repository.Radera(index);
         }
 
         public void RedigeraPodd(int index, Podd podd)
         {
             if (index >= 0 && index < HamtaPoddar().Count && podd != null)
             {  
-                repository.RedigeraPodd(index, podd);
+                repository.Uppdatera(index, podd);
             }
             else
             {
@@ -108,7 +101,7 @@ namespace BL
 
         public List<Podd> HamtaPoddar()
         {
-            return repository.GetAllPodds();
+            return repository.HamtaAlla();
         }
 
 
