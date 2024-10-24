@@ -11,8 +11,7 @@ namespace BL
 {
     public class KategoriHanterare
     {
-        private IRepository<Kategori> kategoriRepository;
-        private String? utKategoriText;
+        private IKategoriRepository<Kategori> kategoriRepository;
 
         public KategoriHanterare() {
             kategoriRepository = new KategoriRepository();
@@ -30,14 +29,14 @@ namespace BL
         }
 
         public void UppdateraKategoriNamn(string gammaltNamn, string nyttNamn)
-        {
+        {    
+
             if (string.IsNullOrWhiteSpace(gammaltNamn) || string.IsNullOrWhiteSpace(nyttNamn))
             {
                 throw new ArgumentException("Både det gamla och nya namnet måste anges.");
             }
 
-            Kategori kategori = kategoriRepository.HamtaAlla()
-                                                   .FirstOrDefault(k => k.Name.Equals(gammaltNamn));
+            Kategori kategori = kategoriRepository.HamtaMedNamn(gammaltNamn);
 
 
             if (kategori == null)
@@ -45,9 +44,11 @@ namespace BL
                 throw new KeyNotFoundException("Kategorin kunde inte hittas");
             }
 
-            kategori.Name = nyttNamn;
+            kategori.Namn = nyttNamn;
 
-            kategoriRepository.SparaAndringar();
+            int index = kategoriRepository.HamtaIndex(gammaltNamn);
+
+            kategoriRepository.Uppdatera(index, kategori);
         }
 
 

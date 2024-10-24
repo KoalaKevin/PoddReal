@@ -23,6 +23,7 @@ namespace WinFormsApp1
         {
             UppdateraDataGridView();
             UppdateraKategoriListBox();
+            FyllCbKategori();
 
         }
 
@@ -93,7 +94,7 @@ namespace WinFormsApp1
             //List<Kategori> kategorier = kategoriHanterare.HamtaKategorier();
             foreach (Kategori enKategori in kategoriHanterare.HamtaKategorier())
             {
-                lbKategorier.Items.Add(enKategori.Name);
+                lbKategorier.Items.Add(enKategori.Namn);
             }
 
         }
@@ -114,6 +115,7 @@ namespace WinFormsApp1
             kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
+            FyllCbKategori();
 
         }
 
@@ -139,6 +141,7 @@ namespace WinFormsApp1
                 kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
 
                 UppdateraKategoriListBox();
+                FyllCbKategori();
 
                 txtKategoriNamn.Clear();
 
@@ -157,10 +160,19 @@ namespace WinFormsApp1
 
             foreach (Kategori enKategori in kategorier)
             {
-                lbKategorier.Items.Add(enKategori.Name);
+                lbKategorier.Items.Add(enKategori.Namn);
             }
 
             lbKategorier.DisplayMember = "Name";
+        }
+
+        private void FyllCbKategori()
+        {
+            cbKategori.Items.Clear();
+            foreach (Kategori kategori in kategoriHanterare.HamtaKategorier())
+            {
+                cbKategori.Items.Add(kategori.Namn);
+            }
         }
 
         private void btnTaBortKategori_Click(object sender, EventArgs e)

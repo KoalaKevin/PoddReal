@@ -15,6 +15,8 @@ namespace DL
 
         void Uppdatera(int index, T entitet);
 
+        int HamtaIndex(string identifierare);
+
         void SparaAndringar();
 
         List<T> HamtaAlla();

@@ -7,7 +7,7 @@ using Models;
 
 namespace DL
 {
-    public class KategoriRepository : IRepository<Kategori>
+    public class KategoriRepository : IKategoriRepository<Kategori>
     {
         private List<Kategori> KategoriLista; 
         private SerializeHelper<Kategori> Serializer;
@@ -34,6 +34,16 @@ namespace DL
         {
             KategoriLista[index] = nyKategori;
             SparaAndringar();
+        }
+
+        public Kategori HamtaMedNamn(string namn)
+        {
+            return HamtaAlla().FirstOrDefault(k => k.Namn.Equals(namn));
+        }
+
+        public int HamtaIndex(string namn)
+        {
+            return HamtaAlla().FindIndex(k => k.Namn.Equals(namn));
         }
 
         public List<Kategori> HamtaAlla() 

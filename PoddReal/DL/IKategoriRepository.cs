@@ -7,10 +7,8 @@ using Models;
 
 namespace DL
 {
-    public interface IPoddRepository<T> : IRepository<T> where T : Podd
+    public interface IKategoriRepository<T> : IRepository<T> where T : Kategori
     {
-        T HamtaMedTitel(string titel);
-
-        T HamtaMedUrl(string url);
+        T HamtaMedNamn(string namn); 
     }
 }
