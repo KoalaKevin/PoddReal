@@ -120,28 +120,12 @@ namespace WinFormsApp1
             kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
-<<<<<<< Updated upstream
+
         }  
-=======
-        }
 
-        //private void btnRedigeraKategori_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        string gammaltNamn = lbKategorier.SelectedItem?.ToString();
-        //        string nyttNamn = txtKategoriNamn.Text;
+        
 
-        //        kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
-
-        //        UppdateraKategoriListBox();
-        //        txtKategoriNamn.Clear();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Ett fel uppstod");
-        //    }
-        //}
+        
 
         private void btnRedigeraKategori_Click(object sender, EventArgs e)
         {
@@ -188,7 +172,7 @@ namespace WinFormsApp1
 
             lbKategorier.DisplayMember = "Name";
         }
->>>>>>> Stashed changes
+
     }
 
 }
