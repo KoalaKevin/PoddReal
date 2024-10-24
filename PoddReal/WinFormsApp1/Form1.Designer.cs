@@ -139,6 +139,7 @@ namespace WinFormsApp1
             btnRedigeraKategori.TabIndex = 12;
             btnRedigeraKategori.Text = "Redigera";
             btnRedigeraKategori.UseVisualStyleBackColor = true;
+            btnRedigeraKategori.Click += btnRedigeraKategori_Click;
             // 
             // cbKategori
             // 

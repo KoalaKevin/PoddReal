@@ -35,5 +35,28 @@ namespace BL
         {
             return kategoriRepository.GetAllKategorier();
         }
+
+        public void UppdateraKategoriNamn(string gammaltNamn, string nyttNamn)
+        {
+            if (string.IsNullOrWhiteSpace(gammaltNamn) || string.IsNullOrWhiteSpace(nyttNamn))
+            {
+                throw new ArgumentException("Både det gamla och nya namnet måste anges.");
+            }
+
+            Kategori kategori = kategoriRepository.GetAllKategorier()
+                                                   .FirstOrDefault(k => k.Name == gammaltNamn);
+
+
+            if (kategori == null)
+            {
+                throw new KeyNotFoundException("Kategorin kunde inte hittas");
+            }
+
+            kategori.Name = nyttNamn;
+
+            kategoriRepository.SparaAndringar();
+        }
+
+
     }
 }

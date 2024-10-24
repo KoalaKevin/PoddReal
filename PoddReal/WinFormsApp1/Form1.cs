@@ -120,7 +120,76 @@ namespace WinFormsApp1
             kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
+<<<<<<< Updated upstream
         }  
+=======
+        }
+
+        //private void btnRedigeraKategori_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string gammaltNamn = lbKategorier.SelectedItem?.ToString();
+        //        string nyttNamn = txtKategoriNamn.Text;
+
+        //        kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
+
+        //        UppdateraKategoriListBox();
+        //        txtKategoriNamn.Clear();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Ett fel uppstod");
+        //    }
+        //}
+
+        private void btnRedigeraKategori_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (lbKategorier.SelectedItem is not string gammaltNamn)
+               {
+                MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+            string nyttNamn = txtKategoriNamn.Text;
+
+            if (string.IsNullOrWhiteSpace(nyttNamn))
+                {
+                    MessageBox.Show("Det nya namnet kan inte vara tomt", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+            kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
+
+            UppdateraKategoriListBox();
+
+            txtKategoriNamn.Clear();
+
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Ett fel har uppstått");
+            }
+        }
+
+        private void UppdateraKategoriListbox()
+        {
+            lbKategorier.Items.Clear();
+
+            List<Kategori> kategorier = kategoriHanterare.HamtaKategorier();
+
+            foreach (Kategori enKategori in kategorier)
+            {
+                lbKategorier.Items.Add(enKategori.Name);
+            }
+
+            lbKategorier.DisplayMember = "Name";
+        }
+>>>>>>> Stashed changes
     }
+
 }
 
