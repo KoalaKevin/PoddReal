@@ -99,7 +99,6 @@ namespace WinFormsApp1
             lbAvsnitt.Name = "lbAvsnitt";
             lbAvsnitt.Size = new Size(209, 244);
             lbAvsnitt.TabIndex = 8;
-            lbAvsnitt.SelectedIndexChanged += lbAvsnitt_SelectedIndexChanged;
             // 
             // rtbBeskrivning
             // 
