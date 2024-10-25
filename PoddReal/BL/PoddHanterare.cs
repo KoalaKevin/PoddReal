@@ -17,7 +17,23 @@ namespace BL
         public PoddHanterare() { 
             repository = new Repository();       
         }
-        
+
+        public List<Avsnitt> AllaAvsnitt(String link)
+        {
+            List<Avsnitt> lista = new List<Avsnitt>(); // Ska kanske vara i Dl men man sparar inget?
+            XmlReader reader = XmlReader.Create(link);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            foreach (SyndicationItem item in feed.Items)
+            {
+                Avsnitt ettAvsnitt = new Avsnitt();
+                ettAvsnitt.Namn = item.Title.Text;
+                ettAvsnitt.Beskrivning = item.Summary.Text;
+                lista.Add(ettAvsnitt);
+
+            }
+            Debug.WriteLine(lista);
+            return lista;
+        }
         public String GetRss(String rssLink) //Flytta till DL?
         {
             try

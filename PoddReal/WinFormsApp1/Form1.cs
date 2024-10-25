@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Reflection.Metadata.Ecma335;
 
 namespace WinFormsApp1
 {
@@ -74,8 +75,14 @@ namespace WinFormsApp1
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
                 txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
+                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
+
+                lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
+                lbAvsnitt.DisplayMember = "Namn";
             }
         }
+
+
 
         private void UppdateraDataGridView()
         {
@@ -178,6 +185,12 @@ namespace WinFormsApp1
         private void btnTaBortKategori_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lbAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
+            rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
         }
     }
 
