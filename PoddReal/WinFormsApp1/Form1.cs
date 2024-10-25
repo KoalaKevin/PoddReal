@@ -27,10 +27,6 @@ namespace WinFormsApp1
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {
@@ -38,7 +34,7 @@ namespace WinFormsApp1
 
             if (!godkandUrl)
             {
-                MessageBox.Show("Vänligen tryck på den podcast du vill ta bort och ändra inte rss länken!");
+                MessageBox.Show("Vï¿½nligen tryck pï¿½ den podcast du vill ta bort och ï¿½ndra inte rss lï¿½nken!");
             }
 
             UppdateraDataGridView();
@@ -51,7 +47,7 @@ namespace WinFormsApp1
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString();
-            Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lösa det bättre?
+            Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lï¿½sa det bï¿½ttre?
             poddHanterare.RedigeraPodd(poddIndex, redigeradPodd);
             UppdateraDataGridView();
             RensaFalt();
@@ -63,7 +59,7 @@ namespace WinFormsApp1
             string url = txtRssInput.Text;
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
-            string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
+            string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej ï¿½n
             poddHanterare.SkapaPodd(url, titel, namn, kategori);
 
             UppdateraDataGridView();
@@ -77,8 +73,11 @@ namespace WinFormsApp1
                 DataGridViewRow rad = dgvPoddar.Rows[e.RowIndex];
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
-                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
+                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hï¿½mta URL pï¿½ ett annat sï¿½tt?
                 poddIndex = e.RowIndex;
+                lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
+                lbAvsnitt.DisplayMember = "Namn";
+                Debug.WriteLine(txtRssInput.Text);
             }
         }
 
@@ -134,7 +133,7 @@ namespace WinFormsApp1
 
                 if (lbKategorier.SelectedItem is not string gammaltNamn)
                {
-                MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vï¿½lj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -155,7 +154,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex) 
             {
-                MessageBox.Show("Ett fel har uppstått");
+                MessageBox.Show("Ett fel har uppstï¿½tt");
             }
         }
 
@@ -173,6 +172,25 @@ namespace WinFormsApp1
             lbKategorier.DisplayMember = "Name";
         }
 
+        private void FyllCbKategori()
+        {
+            cbKategori.Items.Clear();
+            foreach (Kategori kategori in kategoriHanterare.HamtaKategorier())
+            {
+                cbKategori.Items.Add(kategori.Namn);
+            }
+        }
+
+        private void btnTaBortKategori_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
+            rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
+        }
     }
 
 }

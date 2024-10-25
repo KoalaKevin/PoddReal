@@ -24,7 +24,14 @@ namespace DL
         {
             PoddLista.Remove(podd);
             UppdateraLista();
+            try
+            {
+                PoddLista.RemoveAt(index);
+                SparaAndringar();
+            } catch { } 
+            
         }
+      
 
         public void RedigeraPodd(int index, Podd nyPodd)
         {
