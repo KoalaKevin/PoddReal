@@ -11,40 +11,32 @@ namespace BL
 {
     public class KategoriHanterare
     {
-        private KategoriRepository kategoriRepository;
-        private SerializeHelper<Kategori> serializeHelper;
+        private IKategoriRepository<Kategori> kategoriRepository;
 
         public KategoriHanterare() {
             kategoriRepository = new KategoriRepository();
-            serializeHelper = new SerializeHelper<Kategori>();
-            kategoriRepository.fyllLista(serializeHelper.laddaIn(@"..\..\kategoriList.xml"));
-        }
-        private String? utKategoriText;
-        public List<Kategori> getAllKategorier()
-        {
-            return kategoriRepository.GetAllKategorier();
         }
         
         public void SkapaKategori(string name)
         {
             Kategori nyKategori = new Kategori(name);
-            kategoriRepository.AddKategori(nyKategori);
+            kategoriRepository.Skapa(nyKategori);
         }
 
         public List<Kategori> HamtaKategorier()
         {
-            return kategoriRepository.GetAllKategorier();
+            return kategoriRepository.HamtaAlla();
         }
 
         public void UppdateraKategoriNamn(string gammaltNamn, string nyttNamn)
-        {
+        {    
+
             if (string.IsNullOrWhiteSpace(gammaltNamn) || string.IsNullOrWhiteSpace(nyttNamn))
             {
                 throw new ArgumentException("Både det gamla och nya namnet måste anges.");
             }
 
-            Kategori kategori = kategoriRepository.GetAllKategorier()
-                                                   .FirstOrDefault(k => k.Name == gammaltNamn);
+            Kategori kategori = kategoriRepository.HamtaMedNamn(gammaltNamn);
 
 
             if (kategori == null)
@@ -52,9 +44,11 @@ namespace BL
                 throw new KeyNotFoundException("Kategorin kunde inte hittas");
             }
 
-            kategori.Name = nyttNamn;
+            kategori.Namn = nyttNamn;
 
-            kategoriRepository.SparaAndringar();
+            int index = kategoriRepository.HamtaIndex(gammaltNamn);
+
+            kategoriRepository.Uppdatera(index, kategori);
         }
 
 

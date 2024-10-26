@@ -8,13 +8,13 @@ namespace Models
 {
     public class Kategori
     {
-        public String Name { get; set; }
+        public string Namn { get; set; }
 
         public Kategori() { }
 
-        public Kategori(String name)
+        public Kategori(string namn)
         {
-            Name = name;
+            Namn = namn;
         }
 
     }

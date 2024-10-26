@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
-using BL;
 
 namespace DL
 {
-    public class KategoriRepository
+    public class KategoriRepository : IKategoriRepository<Kategori>
     {
         private List<Kategori> KategoriLista; 
         private SerializeHelper<Kategori> Serializer;
@@ -16,23 +15,42 @@ namespace DL
         public KategoriRepository() { 
             KategoriLista = new List<Kategori>();
             Serializer = new SerializeHelper<Kategori>();
+            KategoriLista = HamtaAlla();
         }
 
-        public void AddKategori(Kategori Kategori)
+        public void Skapa(Kategori Kategori)
         {
             KategoriLista.Add(Kategori);
             SparaAndringar();
         }
 
-        public List<Kategori> GetAllKategorier() 
-        { 
-            return KategoriLista;
+        public void Radera(int index)
+        {
+            KategoriLista.RemoveAt(index);
+            SparaAndringar();
         }
 
-        public void fyllLista(List<Kategori> kategoriLista)
+        public void Uppdatera(int index, Kategori nyKategori)
         {
-           KategoriLista = kategoriLista;
+            KategoriLista[index] = nyKategori;
+            SparaAndringar();
         }
+
+        public Kategori HamtaMedNamn(string namn)
+        {
+            return HamtaAlla().FirstOrDefault(k => k.Namn.Equals(namn));
+        }
+
+        public int HamtaIndex(string namn)
+        {
+            return HamtaAlla().FindIndex(k => k.Namn.Equals(namn));
+        }
+
+        public List<Kategori> HamtaAlla() 
+        { 
+            return Serializer.laddaIn(@"..\..\kategoriList.xml");
+        }
+
         public void SparaAndringar()
         {
             Serializer.tillXml(KategoriLista, @"..\..\kategoriList.xml");

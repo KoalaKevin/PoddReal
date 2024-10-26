@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Reflection.Metadata.Ecma335;
 
 namespace WinFormsApp1
 {
@@ -11,7 +12,6 @@ namespace WinFormsApp1
     {
         private PoddHanterare poddHanterare;
         private KategoriHanterare kategoriHanterare;
-        private int poddIndex = -1;
 
         public Form1()
         {
@@ -24,6 +24,7 @@ namespace WinFormsApp1
         {
             UppdateraDataGridView();
             UppdateraKategoriListBox();
+            FyllCbKategori();
 
         }
 
@@ -34,13 +35,7 @@ namespace WinFormsApp1
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {
-            bool godkandUrl = poddHanterare.RaderaPodd(txtRssInput.Text);
-
-            if (!godkandUrl)
-            {
-                MessageBox.Show("Vänligen tryck på den podcast du vill ta bort och ändra inte rss länken!");
-            }
-
+            poddHanterare.RaderaPodd(txtRssInput.Text);
             UppdateraDataGridView();
             RensaFalt();
         }
@@ -51,8 +46,10 @@ namespace WinFormsApp1
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
             string kategori = cbKategori.SelectedItem.ToString();
+            int index = poddHanterare.HamtaIndexMedUrl(url);
+
             Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lösa det bättre?
-            poddHanterare.RedigeraPodd(poddIndex, redigeradPodd);
+            poddHanterare.RedigeraPodd(index, redigeradPodd);
             UppdateraDataGridView();
             RensaFalt();
         }
@@ -78,9 +75,14 @@ namespace WinFormsApp1
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
                 txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
-                poddIndex = e.RowIndex;
+                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
+
+                lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
+                lbAvsnitt.DisplayMember = "Namn";
             }
         }
+
+
 
         private void UppdateraDataGridView()
         {
@@ -99,7 +101,7 @@ namespace WinFormsApp1
             //List<Kategori> kategorier = kategoriHanterare.HamtaKategorier();
             foreach (Kategori enKategori in kategoriHanterare.HamtaKategorier())
             {
-                lbKategorier.Items.Add(enKategori.Name);
+                lbKategorier.Items.Add(enKategori.Namn);
             }
 
         }
@@ -120,12 +122,9 @@ namespace WinFormsApp1
             kategoriHanterare.SkapaKategori(name);
 
             UppdateraKategoriListBox();
+            FyllCbKategori();
 
-        }  
-
-        
-
-        
+        }
 
         private void btnRedigeraKategori_Click(object sender, EventArgs e)
         {
@@ -133,27 +132,28 @@ namespace WinFormsApp1
             {
 
                 if (lbKategorier.SelectedItem is not string gammaltNamn)
-               {
-                MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                {
+                    MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-            string nyttNamn = txtKategoriNamn.Text;
+                string nyttNamn = txtKategoriNamn.Text;
 
-            if (string.IsNullOrWhiteSpace(nyttNamn))
+                if (string.IsNullOrWhiteSpace(nyttNamn))
                 {
                     MessageBox.Show("Det nya namnet kan inte vara tomt", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-            kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
+                kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
 
-            UppdateraKategoriListBox();
+                UppdateraKategoriListBox();
+                FyllCbKategori();
 
-            txtKategoriNamn.Clear();
+                txtKategoriNamn.Clear();
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show("Ett fel har uppstått");
             }
@@ -167,12 +167,31 @@ namespace WinFormsApp1
 
             foreach (Kategori enKategori in kategorier)
             {
-                lbKategorier.Items.Add(enKategori.Name);
+                lbKategorier.Items.Add(enKategori.Namn);
             }
 
             lbKategorier.DisplayMember = "Name";
         }
 
+        private void FyllCbKategori()
+        {
+            cbKategori.Items.Clear();
+            foreach (Kategori kategori in kategoriHanterare.HamtaKategorier())
+            {
+                cbKategori.Items.Add(kategori.Namn);
+            }
+        }
+
+        private void btnTaBortKategori_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAvsnitt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
+            rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
+        }
     }
 
 }
