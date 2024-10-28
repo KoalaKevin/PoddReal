@@ -46,6 +46,7 @@ namespace WinFormsApp1
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             txtKategoriNamn = new TextBox();
+            btnAterstall = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@ namespace WinFormsApp1
             txtRssInput.Location = new Point(241, 60);
             txtRssInput.Margin = new Padding(2);
             txtRssInput.Name = "txtRssInput";
-            txtRssInput.PlaceholderText = "Ange rss-url";
+            txtRssInput.PlaceholderText = "Ange RSS-länk";
             txtRssInput.Size = new Size(240, 23);
             txtRssInput.TabIndex = 2;
             // 
@@ -219,11 +220,22 @@ namespace WinFormsApp1
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;
             // 
+            // btnAterstall
+            // 
+            btnAterstall.Location = new Point(522, 32);
+            btnAterstall.Name = "btnAterstall";
+            btnAterstall.Size = new Size(70, 24);
+            btnAterstall.TabIndex = 18;
+            btnAterstall.Text = "Återställ";
+            btnAterstall.UseVisualStyleBackColor = true;
+            btnAterstall.Click += btnAterstall_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1050, 533);
+            Controls.Add(btnAterstall);
             Controls.Add(txtKategoriNamn);
             Controls.Add(dgvPoddar);
             Controls.Add(btnLaggTillPodd);
@@ -269,5 +281,6 @@ namespace WinFormsApp1
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
+        private Button btnAterstall;
     }
 }

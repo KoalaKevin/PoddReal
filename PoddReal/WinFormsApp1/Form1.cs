@@ -35,9 +35,17 @@ namespace WinFormsApp1
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {
-            poddHanterare.RaderaPodd(txtRssInput.Text);
-            UppdateraDataGridView();
-            RensaFalt();
+            try
+            {
+                poddHanterare.RaderaPodd(txtRssInput.Text);
+                UppdateraDataGridView();
+                RensaFalt();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnRedigeraPodd_Click(object sender, EventArgs e)
@@ -45,13 +53,29 @@ namespace WinFormsApp1
             string url = txtRssInput.Text;
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
-            string kategori = cbKategori.SelectedItem.ToString();
             int index = poddHanterare.HamtaIndexMedUrl(url);
 
-            Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lösa det bättre?
-            poddHanterare.RedigeraPodd(index, redigeradPodd);
-            UppdateraDataGridView();
-            RensaFalt();
+            if (Validering.HarVarde(cbKategori.SelectedItem))
+            {
+                try
+                {
+                    string kategori = cbKategori.SelectedItem.ToString();
+                    Podd redigeradPodd = new Podd(url, titel, namn, kategori);
+                    poddHanterare.RedigeraPodd(index, redigeradPodd, url);
+                    UppdateraDataGridView();
+                    RensaFalt();
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj en kategori", "Fel");
+            }
+            
         }
 
         private void btnLaggTillPodd_Click(object sender, EventArgs e)
@@ -60,11 +84,36 @@ namespace WinFormsApp1
             string url = txtRssInput.Text;
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
-            string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej än
-            poddHanterare.SkapaPodd(url, titel, namn, kategori);
+            
+            if (Validering.StrangHarVarde(url))
+            {
+               
+                if (Validering.HarVarde(cbKategori.SelectedItem))
+                {
+                    string kategori = cbKategori.SelectedItem.ToString();
 
-            UppdateraDataGridView();
-            RensaFalt();
+                    try
+                    {
+                        poddHanterare.SkapaPodd(url, titel, namn, kategori);
+                        UppdateraDataGridView();
+                        RensaFalt();
+                    }
+                    catch (ArgumentException ex) 
+                    { 
+                        MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Vänligen välj en kategori", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
+                }    
+            }
+            else
+            {
+                MessageBox.Show("Vänligen fyll i en Rss-länk", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            } 
         }
 
         private void DgvPoddar_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -191,6 +240,11 @@ namespace WinFormsApp1
         {
             Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
             rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
+        }
+
+        private void btnAterstall_Click(object sender, EventArgs e)
+        {
+            RensaFalt();
         }
     }
 
