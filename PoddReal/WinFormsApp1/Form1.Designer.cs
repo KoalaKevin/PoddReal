@@ -216,6 +216,7 @@ namespace WinFormsApp1
             // 
             txtKategoriNamn.Location = new Point(677, 25);
             txtKategoriNamn.Name = "txtKategoriNamn";
+            txtKategoriNamn.PlaceholderText = "Namn";
             txtKategoriNamn.Size = new Size(100, 23);
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;

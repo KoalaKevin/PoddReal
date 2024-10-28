@@ -73,7 +73,7 @@ namespace WinFormsApp1
             }
             else
             {
-                MessageBox.Show("Vänligen välj en kategori", "Fel");
+                MessageBox.Show("Vänligen välj en kategori", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
         }
@@ -131,8 +131,6 @@ namespace WinFormsApp1
             }
         }
 
-
-
         private void UppdateraDataGridView()
         {
             dgvPoddar.Rows.Clear();
@@ -165,46 +163,51 @@ namespace WinFormsApp1
 
         private void btnLaggTillKategori_Click_1(object sender, EventArgs e)
         {
-            Debug.WriteLine("test");
-            string name = txtKategoriNamn.Text;
-            Debug.WriteLine(name);
-            kategoriHanterare.SkapaKategori(name);
+            string namn = txtKategoriNamn.Text;
 
-            UppdateraKategoriListBox();
-            FyllCbKategori();
-
+            if (Validering.StrangHarVarde(namn))
+            {
+                Debug.WriteLine(namn);
+                kategoriHanterare.SkapaKategori(namn);
+                UppdateraKategoriListBox();
+                FyllCbKategori();
+            }
+            else
+            {
+                MessageBox.Show("Vänligen ange ett kategori namn", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnRedigeraKategori_Click(object sender, EventArgs e)
         {
             try
             {
+                object gammaltNamn = lbKategorier.SelectedItem;
+                string nyttNamn = txtKategoriNamn.Text;
 
-                if (lbKategorier.SelectedItem is not string gammaltNamn)
+
+                if (gammaltNamn == null || !Validering.ArStrang(gammaltNamn))
                 {
                     MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                string nyttNamn = txtKategoriNamn.Text;
-
-                if (string.IsNullOrWhiteSpace(nyttNamn))
+                if (!Validering.HarVarde(nyttNamn))
                 {
                     MessageBox.Show("Det nya namnet kan inte vara tomt", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
+                kategoriHanterare.UppdateraKategoriNamn(gammaltNamn.ToString(), nyttNamn);
 
                 UppdateraKategoriListBox();
                 FyllCbKategori();
-
                 txtKategoriNamn.Clear();
 
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
-                MessageBox.Show("Ett fel har uppstått");
+                MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

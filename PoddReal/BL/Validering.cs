@@ -34,25 +34,14 @@ namespace BL
             return harVarde;
         }
 
-        //public static bool FinnsUrl(string url, List<Podd> lista)
-        //{
-        //    bool existerar = false;
-
-        //    foreach (Podd item in lista)
-        //    {
-        //        if (item.Url.Equals(url))
-        //        {
-        //            existerar = true;
-        //            break;
-        //        }
-        //    }
-
-        //    return existerar;
-        //}
-
         public static bool FinnsUrl(string url, List<Podd> lista)
         {
             return lista.Any(p => p.Url.Equals(url));
+        }
+
+        public static bool ArStrang(object varde)
+        {
+            return varde is string;
         }
     }
 }
