@@ -184,6 +184,29 @@ namespace WinFormsApp1
 
         private void btnTaBortKategori_Click(object sender, EventArgs e)
         {
+            if (lbKategorier.SelectedItem is not string kategoriNamn)
+            {
+                MessageBox.Show("Välj en kategori att radera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var bekräftelse = MessageBox.Show($"Är du säker på att du vill radera kategorin '{kategoriNamn}'?",
+                                              "Bekräfta",
+                                              MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (bekräftelse == DialogResult.Yes) 
+            {
+                try
+                {
+                    kategoriHanterare.RaderaKategori(kategoriNamn);
+                    UppdateraKategoriListBox();
+                    FyllCbKategori();
+                }
+                catch 
+                {
+                    MessageBox.Show("Ett fel uppstod vid radering");
+                }
+            }
+
 
         }
 
