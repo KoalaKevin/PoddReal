@@ -9,8 +9,8 @@ namespace DL
 {
     public interface IPoddRepository<T> : IRepository<T> where T : Podd
     {
-        T HamtaMedTitel(string titel);
+        T HamtaPodd(string titel);
 
-        T HamtaMedUrl(string url);
+        T HamtaPodd(string url, bool arUrl);
     }
 }

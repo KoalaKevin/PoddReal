@@ -104,9 +104,14 @@ namespace BL
             
         }
 
-        public Podd HamtaPodd(string titel)
+        public Podd HamtaMedTitel(string titel)
         {
-            return repository.HamtaMedTitel(titel);
+            return repository.HamtaPodd(titel);
+        }
+
+        public Podd HamtaMedUrl(string url)
+        {
+            return repository.HamtaPodd(url, arUrl: true);
         }
 
         public int HamtaIndexMedUrl(string url)

@@ -31,12 +31,12 @@ namespace DL
             SparaAndringar();
         }
 
-        public Podd HamtaMedTitel(string titel)
+        public Podd HamtaPodd(string titel)
         {
             return HamtaAlla().FirstOrDefault(p => p.Titel.Equals(titel));
         }
 
-        public Podd HamtaMedUrl(string url)
+        public Podd HamtaPodd(string url, bool arUrl)
         {
             return HamtaAlla().FirstOrDefault(p => p.Url.Equals(url));
         }

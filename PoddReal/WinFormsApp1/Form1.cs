@@ -123,8 +123,8 @@ namespace WinFormsApp1
                 DataGridViewRow rad = dgvPoddar.Rows[e.RowIndex];
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
-                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
-                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
+                txtRssInput.Text = poddHanterare.HamtaMedTitel((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
+                txtRssInput.Text = poddHanterare.HamtaMedTitel((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
 
                 lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
                 lbAvsnitt.DisplayMember = "Namn";
