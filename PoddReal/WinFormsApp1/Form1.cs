@@ -179,6 +179,7 @@ namespace WinFormsApp1
             foreach (Kategori kategori in kategoriHanterare.HamtaKategorier())
             {
                 cbKategori.Items.Add(kategori.Namn);
+                cbKategori2.Items.Add(kategori.Namn);
             }
         }
 
@@ -214,6 +215,37 @@ namespace WinFormsApp1
         {
             Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
             rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbKategori2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string kategori = cbKategori2.SelectedItem.ToString();
+               
+                if (kategori.Equals("Alla"))
+                {
+                    UppdateraDataGridView();
+                }
+                else
+                {
+
+                
+                dgvPoddar.Rows.Clear();
+                foreach (Podd enPodd in poddHanterare.GetPoddByKategori(kategori))
+                {
+                    dgvPoddar.Rows.Add(enPodd.Namn, enPodd.Titel, enPodd.Kategori);
+                }
+                }
+
+            }
+            catch (Exception ex) { }
+            
         }
     }
 

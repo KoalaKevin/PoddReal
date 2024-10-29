@@ -46,6 +46,8 @@ namespace WinFormsApp1
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             txtKategoriNamn = new TextBox();
+            cbKategori2 = new ComboBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -219,11 +221,34 @@ namespace WinFormsApp1
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;
             // 
+            // cbKategori2
+            // 
+            cbKategori2.FormattingEnabled = true;
+            cbKategori2.Items.AddRange(new object[] { "Alla" });
+            cbKategori2.Location = new Point(498, 59);
+            cbKategori2.Name = "cbKategori2";
+            cbKategori2.Size = new Size(121, 23);
+            cbKategori2.TabIndex = 18;
+            cbKategori2.Text = "Alla";
+            cbKategori2.SelectedIndexChanged += cbKategori2_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(498, 41);
+            label1.Name = "label1";
+            label1.Size = new Size(44, 15);
+            label1.TabIndex = 19;
+            label1.Text = "Sortera";
+            label1.Click += label1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1050, 533);
+            Controls.Add(label1);
+            Controls.Add(cbKategori2);
             Controls.Add(txtKategoriNamn);
             Controls.Add(dgvPoddar);
             Controls.Add(btnLaggTillPodd);
@@ -239,7 +264,7 @@ namespace WinFormsApp1
             Controls.Add(lbKategorier);
             Controls.Add(txtRssInput);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Alla";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).EndInit();
             ResumeLayout(false);
@@ -269,5 +294,7 @@ namespace WinFormsApp1
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
+        private ComboBox cbKategori2;
+        private Label label1;
     }
 }

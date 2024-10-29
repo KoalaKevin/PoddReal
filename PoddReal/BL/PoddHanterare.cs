@@ -34,6 +34,20 @@ namespace BL
             Debug.WriteLine(lista);
             return lista;
         }
+        public List<Podd> GetPoddByKategori(String kategori)
+        {
+            List<Podd> lista = repository.HamtaAlla(); // Vi kanske ska ladda in poddarna in i en lista i början av programmet och sen bara hämta från listan, mer optimerat
+            List<Podd> utLista = new List<Podd>();  
+            var fraga = from enPodd in lista
+                        where enPodd.Kategori.Equals(kategori)
+                        select enPodd;
+            foreach (var enPodd in fraga)
+            {
+                utLista.Add(enPodd);
+            }
+
+            return utLista;
+        }
         public String GetRss(String rssLink) //Flytta till DL?
         {
             try
