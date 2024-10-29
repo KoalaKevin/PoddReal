@@ -46,8 +46,12 @@ namespace WinFormsApp1
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             txtKategoriNamn = new TextBox();
+
+            btnAterstall = new Button();
+
             cbKategori2 = new ComboBox();
             label1 = new Label();
+
             ((System.ComponentModel.ISupportInitialize)dgvPoddar).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +60,7 @@ namespace WinFormsApp1
             txtRssInput.Location = new Point(241, 60);
             txtRssInput.Margin = new Padding(2);
             txtRssInput.Name = "txtRssInput";
-            txtRssInput.PlaceholderText = "Ange rss-url";
+            txtRssInput.PlaceholderText = "Ange RSS-länk";
             txtRssInput.Size = new Size(240, 23);
             txtRssInput.TabIndex = 2;
             // 
@@ -217,10 +221,22 @@ namespace WinFormsApp1
             // 
             txtKategoriNamn.Location = new Point(677, 25);
             txtKategoriNamn.Name = "txtKategoriNamn";
+            txtKategoriNamn.PlaceholderText = "Namn";
             txtKategoriNamn.Size = new Size(100, 23);
             txtKategoriNamn.TabIndex = 17;
             txtKategoriNamn.TextChanged += textBox1_TextChanged;
             // 
+
+            // btnAterstall
+            // 
+            btnAterstall.Location = new Point(522, 32);
+            btnAterstall.Name = "btnAterstall";
+            btnAterstall.Size = new Size(70, 24);
+            btnAterstall.TabIndex = 18;
+            btnAterstall.Text = "Återställ";
+            btnAterstall.UseVisualStyleBackColor = true;
+            btnAterstall.Click += btnAterstall_Click;
+
             // cbKategori2
             // 
             cbKategori2.FormattingEnabled = true;
@@ -241,14 +257,19 @@ namespace WinFormsApp1
             label1.TabIndex = 19;
             label1.Text = "Sortera";
             label1.Click += label1_Click;
+
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1050, 533);
+
+            Controls.Add(btnAterstall);
+
             Controls.Add(label1);
             Controls.Add(cbKategori2);
+
             Controls.Add(txtKategoriNamn);
             Controls.Add(dgvPoddar);
             Controls.Add(btnLaggTillPodd);
@@ -294,7 +315,9 @@ namespace WinFormsApp1
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
+        private Button btnAterstall;
         private ComboBox cbKategori2;
         private Label label1;
+
     }
 }

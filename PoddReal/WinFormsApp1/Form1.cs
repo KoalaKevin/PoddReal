@@ -35,9 +35,17 @@ namespace WinFormsApp1
 
         private void btnTaBort_Click(object sender, EventArgs e)
         {
-            poddHanterare.RaderaPodd(txtRssInput.Text);
-            UppdateraDataGridView();
-            RensaFalt();
+            try
+            {
+                poddHanterare.RaderaPodd(txtRssInput.Text);
+                UppdateraDataGridView();
+                RensaFalt();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnRedigeraPodd_Click(object sender, EventArgs e)
@@ -45,13 +53,29 @@ namespace WinFormsApp1
             string url = txtRssInput.Text;
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
-            string kategori = cbKategori.SelectedItem.ToString();
             int index = poddHanterare.HamtaIndexMedUrl(url);
 
-            Podd redigeradPodd = new Podd(url, titel, namn, kategori); // samma kod som i LaggTillPodd, lˆsa det b‰ttre?
-            poddHanterare.RedigeraPodd(index, redigeradPodd);
-            UppdateraDataGridView();
-            RensaFalt();
+            if (Validering.HarVarde(cbKategori.SelectedItem))
+            {
+                try
+                {
+                    string kategori = cbKategori.SelectedItem.ToString();
+                    Podd redigeradPodd = new Podd(url, titel, namn, kategori);
+                    poddHanterare.RedigeraPodd(index, redigeradPodd, url);
+                    UppdateraDataGridView();
+                    RensaFalt();
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("V√§nligen v√§lj en kategori", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btnLaggTillPodd_Click(object sender, EventArgs e)
@@ -60,11 +84,36 @@ namespace WinFormsApp1
             string url = txtRssInput.Text;
             string titel = poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
-            string kategori = cbKategori.SelectedItem.ToString(); // Kategori kategori = (Kategori)cbKategori.SelectedItem; Funkar ej ‰n
-            poddHanterare.SkapaPodd(url, titel, namn, kategori);
+            
+            if (Validering.StrangHarVarde(url))
+            {
+               
+                if (Validering.HarVarde(cbKategori.SelectedItem))
+                {
+                    string kategori = cbKategori.SelectedItem.ToString();
 
-            UppdateraDataGridView();
-            RensaFalt();
+                    try
+                    {
+                        poddHanterare.SkapaPodd(url, titel, namn, kategori);
+                        UppdateraDataGridView();
+                        RensaFalt();
+                    }
+                    catch (ArgumentException ex) 
+                    { 
+                        MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("V√§nligen v√§lj en kategori", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
+                }    
+            }
+            else
+            {
+                MessageBox.Show("V√§nligen fyll i en Rss-l√§nk", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            } 
         }
 
         private void DgvPoddar_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -74,15 +123,13 @@ namespace WinFormsApp1
                 DataGridViewRow rad = dgvPoddar.Rows[e.RowIndex];
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
                 cbKategori.Text = (string)rad.Cells["Column3"].Value;
-                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H‰mta URL pÂ ett annat s‰tt?
+                txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H√§mta URL p√• ett annat s√§tt?
                 txtRssInput.Text = poddHanterare.HamtaPodd((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
 
                 lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
                 lbAvsnitt.DisplayMember = "Namn";
             }
         }
-
-
 
         private void UppdateraDataGridView()
         {
@@ -116,46 +163,51 @@ namespace WinFormsApp1
 
         private void btnLaggTillKategori_Click_1(object sender, EventArgs e)
         {
-            Debug.WriteLine("test");
-            string name = txtKategoriNamn.Text;
-            Debug.WriteLine(name);
-            kategoriHanterare.SkapaKategori(name);
+            string namn = txtKategoriNamn.Text;
 
-            UppdateraKategoriListBox();
-            FyllCbKategori();
-
+            if (Validering.StrangHarVarde(namn))
+            {
+                Debug.WriteLine(namn);
+                kategoriHanterare.SkapaKategori(namn);
+                UppdateraKategoriListBox();
+                FyllCbKategori();
+            }
+            else
+            {
+                MessageBox.Show("V√§nligen ange ett kategori namn", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnRedigeraKategori_Click(object sender, EventArgs e)
         {
             try
             {
+                object gammaltNamn = lbKategorier.SelectedItem;
+                string nyttNamn = txtKategoriNamn.Text;
 
-                if (lbKategorier.SelectedItem is not string gammaltNamn)
+
+                if (gammaltNamn == null || !Validering.ArStrang(gammaltNamn))
                 {
-                    MessageBox.Show("V‰lj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("V√§lj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                string nyttNamn = txtKategoriNamn.Text;
-
-                if (string.IsNullOrWhiteSpace(nyttNamn))
+                if (!Validering.HarVarde(nyttNamn))
                 {
                     MessageBox.Show("Det nya namnet kan inte vara tomt", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                kategoriHanterare.UppdateraKategoriNamn(gammaltNamn, nyttNamn);
+                kategoriHanterare.UppdateraKategoriNamn(gammaltNamn.ToString(), nyttNamn);
 
                 UppdateraKategoriListBox();
                 FyllCbKategori();
-
                 txtKategoriNamn.Clear();
 
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
-                MessageBox.Show("Ett fel har uppstÂtt");
+                MessageBox.Show(ex.Message, "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -187,14 +239,14 @@ namespace WinFormsApp1
         {
             if (lbKategorier.SelectedItem is not string kategoriNamn)
             {
-                MessageBox.Show("V‰lj en kategori att radera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("V√§lj en kategori att radera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var bekr‰ftelse = MessageBox.Show($"ƒr du s‰ker pÂ att du vill radera kategorin '{kategoriNamn}'?",
-                                              "Bekr‰fta",
+            var bekr√§ftelse = MessageBox.Show($"√Ñr du s√§ker p√• att du vill radera kategorin '{kategoriNamn}'?",
+                                              "Bekr√§fta",
                                               MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (bekr‰ftelse == DialogResult.Yes) 
+            if (bekr√§ftelse == DialogResult.Yes) 
             {
                 try
                 {
@@ -216,6 +268,11 @@ namespace WinFormsApp1
             Avsnitt valtAvsnitt = (Avsnitt)lbAvsnitt.SelectedItem;
             rtbBeskrivning.Text = valtAvsnitt.Beskrivning;
         }
+
+
+        private void btnAterstall_Click(object sender, EventArgs e)
+        {
+            RensaFalt();
 
         private void label1_Click(object sender, EventArgs e)
         {

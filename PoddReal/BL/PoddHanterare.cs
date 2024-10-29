@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.ServiceModel.Syndication;
 using System.Xml;
@@ -20,18 +21,27 @@ namespace BL
 
         public List<Avsnitt> AllaAvsnitt(String link)
         {
-            List<Avsnitt> lista = new List<Avsnitt>(); // Ska kanske vara i Dl men man sparar inget?
-            XmlReader reader = XmlReader.Create(link);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            foreach (SyndicationItem item in feed.Items)
+            List<Avsnitt> lista = new List<Avsnitt>();
+            try
             {
-                Avsnitt ettAvsnitt = new Avsnitt();
-                ettAvsnitt.Namn = item.Title.Text;
-                ettAvsnitt.Beskrivning = item.Summary.Text;
-                lista.Add(ettAvsnitt);
+                // Ska kanske vara i Dl men man sparar inget?
+                XmlReader reader = XmlReader.Create(link);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    Avsnitt ettAvsnitt = new Avsnitt();
+                    ettAvsnitt.Namn = item.Title.Text;
+                    ettAvsnitt.Beskrivning = item.Summary.Text;
+                    lista.Add(ettAvsnitt);
 
+                }
+                Debug.WriteLine(lista);
             }
-            Debug.WriteLine(lista);
+            catch (Exception e)
+            {
+                Debug.WriteLine("Felmeddelande: " + e.Message);
+            }
+            
             return lista;
         }
         public List<Podd> GetPoddByKategori(String kategori)
@@ -107,18 +117,32 @@ namespace BL
 
         public void SkapaPodd(string url, string titel, string namn, string kategori)
         {
+            if (Validering.FinnsUrl(url, HamtaPoddar()))
+            {
+                throw new ArgumentException ("Rss-länken finns redan");
+            }
+
             Podd nyPodd = new Podd(url, titel, namn, kategori);
-                repository.Skapa(nyPodd);   
+            repository.Skapa(nyPodd);   
         }
 
         public void RaderaPodd(string url)
         {
+            if(!Validering.FinnsUrl(url, HamtaPoddar()))
+            {
+                throw new ArgumentException("Vänligen ange en befintligt RSS-länk!");
+            }
+
             int index = repository.HamtaIndex(url);
             repository.Radera(index);
         }
 
-        public void RedigeraPodd(int index, Podd podd)
+        public void RedigeraPodd(int index, Podd podd, string url)
         {
+            if (!Validering.FinnsUrl(url, HamtaPoddar()))
+            {
+                throw new ArgumentException("Vänligen ange en befintligt RSS-länk!");
+            }
             if (index >= 0 && index < HamtaPoddar().Count && podd != null)
             {  
                 repository.Uppdatera(index, podd);

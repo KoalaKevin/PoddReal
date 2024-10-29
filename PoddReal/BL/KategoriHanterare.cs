@@ -31,13 +31,12 @@ namespace BL
         public void UppdateraKategoriNamn(string gammaltNamn, string nyttNamn)
         {    
 
-            if (string.IsNullOrWhiteSpace(gammaltNamn) || string.IsNullOrWhiteSpace(nyttNamn))
+            if (!Validering.StrangHarVarde(gammaltNamn) || !Validering.StrangHarVarde(nyttNamn))
             {
                 throw new ArgumentException("Både det gamla och nya namnet måste anges.");
             }
 
             Kategori kategori = kategoriRepository.HamtaMedNamn(gammaltNamn);
-
 
             if (kategori == null)
             {
