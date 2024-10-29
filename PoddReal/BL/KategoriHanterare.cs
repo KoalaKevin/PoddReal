@@ -50,6 +50,11 @@ namespace BL
             kategoriRepository.Uppdatera(index, kategori);
         }
 
-
+        
+        public void RaderaKategori(string namn)
+        {
+            int index = kategoriRepository.HamtaIndex(namn);
+            kategoriRepository.Radera(index);
+        }
     }
 }
