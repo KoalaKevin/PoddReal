@@ -48,10 +48,10 @@ namespace WinFormsApp1
             
         }
 
-        private void btnRedigeraPodd_Click(object sender, EventArgs e)
+        private async void btnRedigeraPodd_Click(object sender, EventArgs e)
         {
             string url = txtRssInput.Text;
-            string titel = poddHanterare.HamtaTitel(url);
+            string titel = await poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
             int index = poddHanterare.HamtaIndexMedUrl(url);
 
@@ -78,11 +78,11 @@ namespace WinFormsApp1
             
         }
 
-        private void btnLaggTillPodd_Click(object sender, EventArgs e)
+        private async void btnLaggTillPodd_Click(object sender, EventArgs e)
         {
 
             string url = txtRssInput.Text;
-            string titel = poddHanterare.HamtaTitel(url);
+            string titel = await poddHanterare.HamtaTitel(url);
             string namn = txtNamn.Text;
             
             if (Validering.StrangHarVarde(url))

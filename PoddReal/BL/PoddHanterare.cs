@@ -67,39 +67,15 @@ namespace BL
 
             return utLista;
         }
-        public String GetRss(String rssLink) //Flytta till DL?
+        
+
+        public async Task<string> HamtaTitel(string url)
         {
             try
             {
-                XmlReader reader = XmlReader.Create(rssLink);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
-            
-
-
-            foreach (SyndicationItem item in feed.Items)
-            {
-                Podd enPodd = new Podd();
-                enPodd.Url = item.Id.ToString();
-                enPodd.Namn = item.Title.Text;
-                repository.Skapa(enPodd);
-                List<Podd> test = repository.HamtaAlla();
-                Podd utPodd = test[0];
-                utPoddText = utPodd.Namn;
                 
-
-            }
-            }
-            catch (Exception ex) { }
-
-            return utPoddText;
-        }
-
-        public string HamtaTitel(string url)
-        {
-            try
-            {
                 XmlReader reader = XmlReader.Create(url);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                SyndicationFeed feed = await Task.Run(() => SyndicationFeed.Load(reader));
                 reader.Close();
 
                 return feed.Title.Text;
