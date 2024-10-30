@@ -31,7 +31,16 @@ namespace BL
                 {
                     Avsnitt ettAvsnitt = new Avsnitt();
                     ettAvsnitt.Namn = item.Title.Text;
-                    ettAvsnitt.Beskrivning = item.Summary.Text;
+                    if(item.Summary != null)
+                    {
+                        ettAvsnitt.Beskrivning = item.Summary.Text;
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Gick inte att hämta beskrivning");
+                        ettAvsnitt.Beskrivning = "Beskrivning saknas";
+                    }
+                    
                     lista.Add(ettAvsnitt);
 
                 }

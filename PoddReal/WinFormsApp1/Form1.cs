@@ -122,9 +122,8 @@ namespace WinFormsApp1
             {
                 DataGridViewRow rad = dgvPoddar.Rows[e.RowIndex];
                 txtNamn.Text = (string)rad.Cells["Column1"].Value;
-                cbKategori.Text = (string)rad.Cells["Column3"].Value;
-                txtRssInput.Text = poddHanterare.HamtaMedTitel((string)rad.Cells["Column2"].Value).Url; // Hämta URL på ett annat sätt?
-                txtRssInput.Text = poddHanterare.HamtaMedTitel((string)rad.Cells["Column2"].Value).Url; // H mta URL p  ett annat s tt?
+                txtRssInput.Text = poddHanterare.HamtaMedTitel((string)rad.Cells["Column2"].Value).Url;
+                cbKategori.Text = poddHanterare.HamtaMedUrl(txtRssInput.Text).Kategori;
 
                 lbAvsnitt.DataSource = poddHanterare.AllaAvsnitt(txtRssInput.Text);
                 lbAvsnitt.DisplayMember = "Namn";
@@ -186,7 +185,7 @@ namespace WinFormsApp1
                 string nyttNamn = txtKategoriNamn.Text;
 
 
-                if (gammaltNamn == null || !Validering.ArStrang(gammaltNamn))
+                if (!Validering.ArStrang(gammaltNamn))
                 {
                     MessageBox.Show("Välj en kategori att redigera.", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -237,20 +236,22 @@ namespace WinFormsApp1
 
         private void btnTaBortKategori_Click(object sender, EventArgs e)
         {
-            if (lbKategorier.SelectedItem is not string kategoriNamn)
+            object valdKategori = lbKategorier.SelectedItem;
+
+            if (!Validering.ArStrang(valdKategori))
             {
                 MessageBox.Show("Välj en kategori att radera", "Fel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var bekräftelse = MessageBox.Show($"Är du säker på att du vill radera kategorin '{kategoriNamn}'?",
+            var bekräftelse = MessageBox.Show($"Är du säker på att du vill radera kategorin '{lbKategorier.SelectedItem}'?",
                                               "Bekräfta",
                                               MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (bekräftelse == DialogResult.Yes) 
             {
                 try
                 {
-                    kategoriHanterare.RaderaKategori(kategoriNamn);
+                    kategoriHanterare.RaderaKategori(valdKategori.ToString());
                     UppdateraKategoriListBox();
                     FyllCbKategori();
                 }
