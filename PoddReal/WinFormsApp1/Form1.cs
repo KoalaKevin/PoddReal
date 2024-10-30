@@ -273,6 +273,7 @@ namespace WinFormsApp1
         private void btnAterstall_Click(object sender, EventArgs e)
         {
             RensaFalt();
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
