@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Reflection.Metadata.Ecma335;
+using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
@@ -22,6 +23,7 @@ namespace WinFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dgvPoddar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             UppdateraDataGridView();
             UppdateraKategoriListBox();
             FyllCbKategori();

@@ -177,6 +177,10 @@ namespace WinFormsApp1
             // 
             // dgvPoddar
             // 
+            dgvPoddar.AllowUserToAddRows = false;
+            dgvPoddar.AllowUserToDeleteRows = false;
+            dgvPoddar.AllowUserToResizeColumns = false;
+            dgvPoddar.AllowUserToResizeRows = false;
             dgvPoddar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPoddar.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
             dgvPoddar.Location = new Point(4, 147);
