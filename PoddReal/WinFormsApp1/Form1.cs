@@ -244,7 +244,7 @@ namespace WinFormsApp1
                 return;
             }
 
-            var bekräftelse = MessageBox.Show($"Är du säker på att du vill radera kategorin '{lbKategorier.SelectedItem}'?",
+            var bekräftelse = MessageBox.Show($"Är du säker på att du vill radera kategorin '{valdKategori}'?",
                                               "Bekräfta",
                                               MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (bekräftelse == DialogResult.Yes) 
